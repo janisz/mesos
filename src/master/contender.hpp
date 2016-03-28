@@ -91,7 +91,7 @@ class StandaloneMasterContender : public MasterContender
 public:
   StandaloneMasterContender()
     : initialized(false),
-      promise(NULL) {}
+      promise(nullptr) {}
   virtual ~StandaloneMasterContender();
 
   // MasterContender implementation.

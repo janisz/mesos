@@ -571,7 +571,7 @@ void Master::initialize()
     }
   }
 
-  if (httpAuthenticator.isSome() && httpAuthenticator.get() != NULL) {
+  if (httpAuthenticator.isSome() && httpAuthenticator.get() != nullptr) {
     // Ownership of the `httpAuthenticator` is passed to libprocess.
     process::http::authentication::setAuthenticator(
         DEFAULT_HTTP_AUTHENTICATION_REALM,
@@ -1245,7 +1245,7 @@ void Master::exited(const UPID& pid)
 
       foreach (const FrameworkID& frameworkId, frameworkIds) {
         Framework* framework = getFramework(frameworkId);
-        if (framework != NULL && !framework->info.checkpoint()) {
+        if (framework != nullptr && !framework->info.checkpoint()) {
           LOG(INFO) << "Removing framework " << *framework
                     << " from disconnected slave " << *slave
                     << " because the framework is not checkpointing";
@@ -1959,7 +1959,7 @@ void Master::receive(
   // because they are common for all the call handlers.
   Framework* framework = getFramework(call.framework_id());
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     drop(from, call, "Framework cannot be found");
     return;
   }
@@ -2597,7 +2597,7 @@ void Master::unregisterFramework(
   LOG(INFO) << "Asked to unregister framework " << frameworkId;
 
   Framework* framework = getFramework(frameworkId);
-  if (framework != NULL) {
+  if (framework != nullptr) {
     if (framework->pid == from) {
       teardown(framework);
     } else {
@@ -2617,7 +2617,7 @@ void Master::deactivateFramework(
 
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring deactivate framework message for framework " << frameworkId
       << " because the framework cannot be found";
@@ -2753,7 +2753,7 @@ void Master::resourceRequest(
 {
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring resource request message from framework " << frameworkId
       << " because the framework cannot be found";
@@ -2823,7 +2823,7 @@ void Master::launchTasks(
 {
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring launch tasks message for offers " << stringify(offerIds)
       << " of framework " << frameworkId
@@ -3198,7 +3198,7 @@ void Master::accept(
       // a resource offer, or an inverse offer. We first try as a resource offer
       // and if that fails, then we assume it is an inverse offer. This is
       // correct as those are currently the only 2 ways to get an `OfferID`.
-      if (offer != NULL) {
+      if (offer != nullptr) {
         slaveId = offer->slave_id();
         offeredResources += offer->resources();
 
@@ -3216,7 +3216,7 @@ void Master::accept(
       // Try it as an inverse offer. If this fails then the offer is no longer
       // valid.
       InverseOffer* inverseOffer = getInverseOffer(offerId);
-      if (inverseOffer != NULL) {
+      if (inverseOffer != nullptr) {
         mesos::master::InverseOfferStatus status;
         status.set_status(mesos::master::InverseOfferStatus::ACCEPT);
         status.mutable_framework_id()->CopyFrom(inverseOffer->framework_id());
@@ -3394,7 +3394,7 @@ void Master::_accept(
 
   // TODO(jieyu): Consider using the 'drop' overload mentioned in
   // 'accept' to consistently handle dropping ACCEPT calls.
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring ACCEPT call for framework " << frameworkId
       << " because the framework cannot be found";
@@ -3411,7 +3411,7 @@ void Master::_accept(
 
   Slave* slave = slaves.registered.get(slaveId);
 
-  if (slave == NULL || !slave->connected) {
+  if (slave == nullptr || !slave->connected) {
     foreach (const Offer::Operation& operation, accept.operations()) {
       if (operation.type() != Offer::Operation::LAUNCH) {
         continue;
@@ -3419,7 +3419,7 @@ void Master::_accept(
 
       foreach (const TaskInfo& task, operation.launch().task_infos()) {
         const TaskStatus::Reason reason =
-            slave == NULL ? TaskStatus::REASON_SLAVE_REMOVED
+            slave == nullptr ? TaskStatus::REASON_SLAVE_REMOVED
                           : TaskStatus::REASON_SLAVE_DISCONNECTED;
         const StatusUpdate& update = protobuf::createStatusUpdate(
             framework->id(),
@@ -3428,7 +3428,7 @@ void Master::_accept(
             TASK_LOST,
             TaskStatus::SOURCE_MASTER,
             None(),
-            slave == NULL ? "Slave removed" : "Slave disconnected",
+            slave == nullptr ? "Slave removed" : "Slave disconnected",
             reason);
 
         metrics->tasks_lost++;
@@ -3834,7 +3834,7 @@ void Master::decline(
     // if that fails, then we assume it is an inverse offer. This is correct as
     // those are currently the only 2 ways to get an `OfferID`.
     Offer* offer = getOffer(offerId);
-    if (offer != NULL) {
+    if (offer != nullptr) {
       allocator->recoverResources(
           offer->framework_id(),
           offer->slave_id(),
@@ -3848,7 +3848,7 @@ void Master::decline(
     // Try it as an inverse offer. If this fails then the offer is no longer
     // valid.
     InverseOffer* inverseOffer = getInverseOffer(offerId);
-    if (inverseOffer != NULL) { // If this is an inverse offer.
+    if (inverseOffer != nullptr) { // If this is an inverse offer.
       mesos::master::InverseOfferStatus status;
       status.set_status(mesos::master::InverseOfferStatus::DECLINE);
       status.mutable_framework_id()->CopyFrom(inverseOffer->framework_id());
@@ -3879,7 +3879,7 @@ void Master::reviveOffers(const UPID& from, const FrameworkID& frameworkId)
 {
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring revive offers message for framework " << frameworkId
       << " because the framework cannot be found";
@@ -3919,7 +3919,7 @@ void Master::killTask(
 
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring kill task message for task " << taskId << " of framework "
       << frameworkId << " because the framework cannot be found";
@@ -3969,7 +3969,7 @@ void Master::kill(Framework* framework, const scheduler::Call::Kill& kill)
   }
 
   Task* task = framework->getTask(taskId);
-  if (task == NULL) {
+  if (task == nullptr) {
     LOG(WARNING) << "Cannot kill task " << taskId
                  << " of framework " << *framework
                  << " because it is unknown; performing reconciliation";
@@ -3994,7 +3994,7 @@ void Master::kill(Framework* framework, const scheduler::Call::Kill& kill)
   }
 
   Slave* slave = slaves.registered.get(task->slave_id());
-  CHECK(slave != NULL) << "Unknown slave " << task->slave_id();
+  CHECK(slave != nullptr) << "Unknown slave " << task->slave_id();
 
   // We add the task to 'killedTasks' here because the slave
   // might be partitioned or disconnected but the master
@@ -4040,7 +4040,7 @@ void Master::statusUpdateAcknowledgement(
 
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Ignoring status update acknowledgement " << UUID::fromBytes(uuid)
       << " for task " << taskId << " of framework " << frameworkId
@@ -4081,7 +4081,7 @@ void Master::acknowledge(
 
   Slave* slave = slaves.registered.get(slaveId);
 
-  if (slave == NULL) {
+  if (slave == nullptr) {
     LOG(WARNING)
       << "Cannot send status update acknowledgement " << uuid
       << " for task " << taskId << " of framework " << *framework
@@ -4104,7 +4104,7 @@ void Master::acknowledge(
 
   Task* task = slave->getTask(framework->id(), taskId);
 
-  if (task != NULL) {
+  if (task != nullptr) {
     // Status update state and uuid should be either set or unset
     // together.
     CHECK_EQ(task->has_status_update_uuid(), task->has_status_update_state());
@@ -4155,7 +4155,7 @@ void Master::schedulerMessage(
 {
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING) << "Ignoring framework message"
                  << " for executor '" << executorId << "'"
                  << " of framework " << frameworkId
@@ -4224,7 +4224,7 @@ void Master::executorMessage(
 
   Framework* framework = getFramework(frameworkId);
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING) << "Not forwarding executor message"
                  << " for executor '" << executorId << "'"
                  << " of framework " << frameworkId
@@ -4256,7 +4256,7 @@ void Master::message(
 
   Slave* slave = slaves.registered.get(message.slave_id());
 
-  if (slave == NULL) {
+  if (slave == nullptr) {
     LOG(WARNING) << "Cannot send framework message for framework "
                  << *framework << " to slave " << message.slave_id()
                  << " because slave is not registered";
@@ -4537,7 +4537,7 @@ void Master::reregisterSlave(
 
   Slave* slave = slaves.registered.get(slaveInfo.id());
 
-  if (slave != NULL) {
+  if (slave != nullptr) {
     slave->reregisteredTime = Clock::now();
 
     // NOTE: This handles the case where a slave tries to
@@ -4720,7 +4720,7 @@ void Master::__reregisterSlave(Slave* slave, const vector<Task>& tasks)
   foreach (const Task& task, tasks) {
     Framework* framework = getFramework(task.framework_id());
 
-    if (framework != NULL && !ids.contains(framework->id())) {
+    if (framework != nullptr && !ids.contains(framework->id())) {
       UpdateFrameworkMessage message;
       message.mutable_framework_id()->MergeFrom(framework->id());
 
@@ -4756,7 +4756,7 @@ void Master::unregisterSlave(const UPID& from, const SlaveID& slaveId)
 
   Slave* slave = slaves.registered.get(slaveId);
 
-  if (slave != NULL) {
+  if (slave != nullptr) {
     if (slave->pid != from) {
       LOG(WARNING) << "Ignoring unregister slave message from " << from
                    << " because it is not the slave " << slave->pid;
@@ -4926,7 +4926,7 @@ void Master::statusUpdate(StatusUpdate update, const UPID& pid)
 
   Slave* slave = slaves.registered.get(update.slave_id());
 
-  if (slave == NULL) {
+  if (slave == nullptr) {
     LOG(WARNING) << "Ignoring status update " << update
                  << " from unknown slave " << pid
                  << " with id " << update.slave_id();
@@ -4936,7 +4936,7 @@ void Master::statusUpdate(StatusUpdate update, const UPID& pid)
 
   Framework* framework = getFramework(update.framework_id());
 
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING) << "Ignoring status update " << update
                  << " from slave " << *slave
                  << " because the framework is unknown";
@@ -4960,7 +4960,7 @@ void Master::statusUpdate(StatusUpdate update, const UPID& pid)
 
   // Lookup the task and see if we need to update anything locally.
   Task* task = slave->getTask(update.framework_id(), update.status().task_id());
-  if (task == NULL) {
+  if (task == nullptr) {
     LOG(WARNING) << "Could not lookup task for status update " << update
                  << " from slave " << *slave;
     metrics->invalid_status_updates++;
@@ -5055,7 +5055,7 @@ void Master::exitedExecutor(
 
   // TODO(vinod): Reliably forward this message to the scheduler.
   Framework* framework = getFramework(frameworkId);
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING)
       << "Not forwarding exited executor message for executor '" << executorId
       << "' of framework " << frameworkId << " on slave " << *slave
@@ -5151,7 +5151,7 @@ void Master::reconcileTasks(
     const vector<TaskStatus>& statuses)
 {
   Framework* framework = getFramework(frameworkId);
-  if (framework == NULL) {
+  if (framework == nullptr) {
     LOG(WARNING) << "Unknown framework " << frameworkId << " at " << from
                  << " attempted to reconcile tasks";
     return;
@@ -5280,7 +5280,7 @@ void Master::_reconcileTasks(
           None(),
           "Reconciliation: Latest task state",
           TaskStatus::REASON_RECONCILIATION);
-    } else if (task != NULL) {
+    } else if (task != nullptr) {
       // (2) Task is known: send the latest status update state.
       const TaskState& state = task->has_status_update_state()
           ? task->status_update_state()
@@ -5353,7 +5353,7 @@ void Master::frameworkFailoverTimeout(const FrameworkID& frameworkId,
 {
   Framework* framework = getFramework(frameworkId);
 
-  if (framework != NULL && !framework->connected) {
+  if (framework != nullptr && !framework->connected) {
     // If the re-registration time has not changed, then the framework
     // has not re-registered within the failover timeout.
     if (framework->reregisteredTime == reregisteredTime) {
@@ -6115,7 +6115,7 @@ void Master::removeFramework(Framework* framework)
 
     // Since we only find out about tasks when the slave re-registers,
     // it must be the case that the slave exists!
-    CHECK(slave != NULL)
+    CHECK(slave != nullptr)
       << "Unknown slave " << task->slave_id()
       << " for task " << task->task_id();
 
@@ -6173,7 +6173,7 @@ void Master::removeFramework(Framework* framework)
   foreachkey (const SlaveID& slaveId, utils::copy(framework->executors)) {
     Slave* slave = slaves.registered.get(slaveId);
 
-    if (slave != NULL) {
+    if (slave != nullptr) {
       foreachkey (const ExecutorID& executorId,
                   utils::copy(framework->executors[slaveId])) {
         removeExecutor(slave, framework->id(), executorId);
@@ -6311,7 +6311,8 @@ void Master::addSlave(
     foreachvalue (const ExecutorInfo& executorInfo,
                   slave->executors[frameworkId]) {
       Framework* framework = getFramework(frameworkId);
-      if (framework != NULL) { // The framework might not be re-registered yet.
+      // The framework might not be re-registered yet.
+      if (framework != nullptr) {
         framework->addExecutor(slave->id, executorInfo);
       }
     }
@@ -6321,7 +6322,8 @@ void Master::addSlave(
   foreachkey (const FrameworkID& frameworkId, slave->tasks) {
     foreachvalue (Task* task, slave->tasks[frameworkId]) {
       Framework* framework = getFramework(task->framework_id());
-      if (framework != NULL) { // The framework might not be re-registered yet.
+      // The framework might not be re-registered yet.
+      if (framework != nullptr) {
         framework->addTask(task);
       } else {
         // TODO(benh): We should really put a timeout on how long we
@@ -6345,7 +6347,7 @@ void Master::addSlave(
         completedFramework.framework_info().id());
 
     foreach (const Task& task, completedFramework.tasks()) {
-      if (framework != NULL) {
+      if (framework != nullptr) {
         VLOG(2) << "Re-adding completed task " << task.task_id()
                 << " of framework " << *framework
                 << " that ran on slave " << *slave;
@@ -6517,7 +6519,7 @@ void Master::_removeSlave(
   foreach (const StatusUpdate& update, updates) {
     Framework* framework = getFramework(update.framework_id());
 
-    if (framework == NULL) {
+    if (framework == nullptr) {
       LOG(WARNING) << "Dropping update " << update << " from unknown framework "
                    << update.framework_id();
     } else {
@@ -6618,14 +6620,14 @@ void Master::updateTask(Task* task, const StatusUpdate& update)
         task->resources(),
         None());
 
-    // The slave owns the Task object and cannot be NULL.
+    // The slave owns the Task object and cannot be nullptr.
     Slave* slave = slaves.registered.get(task->slave_id());
     CHECK_NOTNULL(slave);
 
     slave->taskTerminated(task);
 
     Framework* framework = getFramework(task->framework_id());
-    if (framework != NULL) {
+    if (framework != nullptr) {
       framework->taskTerminated(task);
     }
 
@@ -6652,7 +6654,7 @@ void Master::removeTask(Task* task)
 {
   CHECK_NOTNULL(task);
 
-  // The slave owns the Task object and cannot be NULL.
+  // The slave owns the Task object and cannot be nullptr.
   Slave* slave = slaves.registered.get(task->slave_id());
   CHECK_NOTNULL(slave);
 
@@ -6679,7 +6681,7 @@ void Master::removeTask(Task* task)
 
   // Remove from framework.
   Framework* framework = getFramework(task->framework_id());
-  if (framework != NULL) { // A framework might not be re-connected yet.
+  if (framework != nullptr) { // A framework might not be re-connected yet.
     framework->removeTask(task);
   }
 
@@ -6708,7 +6710,7 @@ void Master::removeExecutor(
     frameworkId, slave->id, executor.resources(), None());
 
   Framework* framework = getFramework(frameworkId);
-  if (framework != NULL) { // The framework might not be re-registered yet.
+  if (framework != nullptr) { // The framework might not be re-registered yet.
     framework->removeExecutor(slave->id, executorId);
   }
 
@@ -6758,7 +6760,7 @@ void Master::_apply(Slave* slave, const Offer::Operation& operation) {
 void Master::offerTimeout(const OfferID& offerId)
 {
   Offer* offer = getOffer(offerId);
-  if (offer != NULL) {
+  if (offer != nullptr) {
     allocator->recoverResources(
         offer->framework_id(), offer->slave_id(), offer->resources(), None());
     removeOffer(offer, true);
@@ -6772,7 +6774,7 @@ void Master::removeOffer(Offer* offer, bool rescind)
 {
   // Remove from framework.
   Framework* framework = getFramework(offer->framework_id());
-  CHECK(framework != NULL)
+  CHECK(framework != nullptr)
     << "Unknown framework " << offer->framework_id()
     << " in the offer " << offer->id();
 
@@ -6781,7 +6783,7 @@ void Master::removeOffer(Offer* offer, bool rescind)
   // Remove from slave.
   Slave* slave = slaves.registered.get(offer->slave_id());
 
-  CHECK(slave != NULL)
+  CHECK(slave != nullptr)
     << "Unknown slave " << offer->slave_id()
     << " in the offer " << offer->id();
 
@@ -6809,7 +6811,7 @@ void Master::removeOffer(Offer* offer, bool rescind)
 void Master::inverseOfferTimeout(const OfferID& inverseOfferId)
 {
   InverseOffer* inverseOffer = getInverseOffer(inverseOfferId);
-  if (inverseOffer != NULL) {
+  if (inverseOffer != nullptr) {
     allocator->updateInverseOffer(
         inverseOffer->slave_id(),
         inverseOffer->framework_id(),
@@ -6827,7 +6829,7 @@ void Master::removeInverseOffer(InverseOffer* inverseOffer, bool rescind)
 {
   // Remove from framework.
   Framework* framework = getFramework(inverseOffer->framework_id());
-  CHECK(framework != NULL)
+  CHECK(framework != nullptr)
     << "Unknown framework " << inverseOffer->framework_id()
     << " in the inverse offer " << inverseOffer->id();
 
@@ -6836,7 +6838,7 @@ void Master::removeInverseOffer(InverseOffer* inverseOffer, bool rescind)
   // Remove from slave.
   Slave* slave = slaves.registered.get(inverseOffer->slave_id());
 
-  CHECK(slave != NULL)
+  CHECK(slave != nullptr)
     << "Unknown slave " << inverseOffer->slave_id()
     << " in the inverse offer " << inverseOffer->id();
 
@@ -6866,14 +6868,14 @@ Framework* Master::getFramework(const FrameworkID& frameworkId)
 {
   return frameworks.registered.contains(frameworkId)
     ? frameworks.registered[frameworkId]
-    : NULL;
+    : nullptr;
 }
 
 
 // TODO(bmahler): Consider killing this.
 Offer* Master::getOffer(const OfferID& offerId)
 {
-  return offers.contains(offerId) ? offers[offerId] : NULL;
+  return offers.contains(offerId) ? offers[offerId] : nullptr;
 }
 
 
@@ -6881,7 +6883,7 @@ Offer* Master::getOffer(const OfferID& offerId)
 InverseOffer* Master::getInverseOffer(const OfferID& inverseOfferId)
 {
   return inverseOffers.contains(inverseOfferId) ?
-    inverseOffers[inverseOfferId] : NULL;
+    inverseOffers[inverseOfferId] : nullptr;
 }
 
 

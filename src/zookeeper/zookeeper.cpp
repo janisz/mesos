@@ -108,7 +108,7 @@ public:
           servers.c_str(),
           event,
           static_cast<int>(sessionTimeout.ms()),
-          NULL,
+          nullptr,
           &callback,
           0);
 
@@ -232,7 +232,7 @@ public:
     }
 
     // First check if the path exists.
-    return exists(path, false, NULL)
+    return exists(path, false, nullptr)
       .then(defer(self(),
                   &Self::_create,
                   path,
@@ -385,7 +385,7 @@ public:
     Future<int> future = promise->future();
 
     tuple<Promise<int>*, Stat*>* args =
-      new tuple<Promise<int>*, Stat*>(promise, NULL);
+      new tuple<Promise<int>*, Stat*>(promise, nullptr);
 
     int ret = zoo_aset(
         zh,
@@ -444,7 +444,7 @@ private:
     string* result = std::get<1>(*args);
 
     if (ret == 0) {
-      if (result != NULL) {
+      if (result != nullptr) {
         result->assign(value);
       }
     }
@@ -490,7 +490,7 @@ private:
     Stat* stat_result = std::get<2>(*args);
 
     if (ret == 0) {
-      if (result != NULL) {
+      if (result != nullptr) {
         result->assign(value, value_len);
       }
 
@@ -517,7 +517,7 @@ private:
     vector<string>* results = std::get<1>(*args);
 
     if (ret == 0) {
-      if (results != NULL) {
+      if (results != nullptr) {
         for (int i = 0; i < values->count; i++) {
           results->push_back(values->data[i]);
         }

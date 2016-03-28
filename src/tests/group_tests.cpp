@@ -302,7 +302,7 @@ TEST_F(GroupTest, GroupPathWithRestrictivePerms)
       "42",
       zookeeper::EVERYONE_READ_CREATOR_ALL,
       0,
-      NULL);
+      nullptr);
 
   ASSERT_ZK_GET("42", &authenticatedZk, "/read-only");
 
@@ -311,7 +311,7 @@ TEST_F(GroupTest, GroupPathWithRestrictivePerms)
       "37",
       ZOO_OPEN_ACL_UNSAFE,
       0,
-      NULL);
+      nullptr);
 
   ASSERT_ZK_GET("37", &authenticatedZk, "/read-only/writable");
 

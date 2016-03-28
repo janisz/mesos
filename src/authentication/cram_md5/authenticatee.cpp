@@ -69,7 +69,7 @@ public:
     // expecting the data appended to the end of the struct. *sigh*
     secret = (sasl_secret_t*) malloc(sizeof(sasl_secret_t) + length);
 
-    CHECK(secret != NULL) << "Failed to allocate memory for secret";
+    CHECK(secret != nullptr) << "Failed to allocate memory for secret";
 
     memcpy(secret->data, data, length);
     secret->len = length;
@@ -98,7 +98,7 @@ public:
       int result = sasl_client_init(nullptr);
       if (result != SASL_OK) {
         status = ERROR;
-        string error(sasl_errstring(result, NULL, NULL));
+        string error(sasl_errstring(result, nullptr, nullptr));
         promise.fail("Failed to initialize SASL: " + error);
         initialize->done();
         return promise.future();
@@ -158,7 +158,7 @@ public:
 
     if (result != SASL_OK) {
       status = ERROR;
-      string error(sasl_errstring(result, NULL, NULL));
+      string error(sasl_errstring(result, nullptr, nullptr));
       promise.fail("Failed to create client SASL connection: " + error);
       return promise.future();
     }
@@ -263,7 +263,7 @@ protected:
 
     int result = sasl_client_step(
         connection,
-        data.length() == 0 ? NULL : data.data(),
+        data.length() == 0 ? nullptr : data.data(),
         data.length(),
         &interact,
         &output,
@@ -401,7 +401,7 @@ Future<bool> CRAMMD5Authenticatee::authenticate(
     return false;
   }
 
-  CHECK(process == NULL);
+  CHECK(process == nullptr);
   process = new CRAMMD5AuthenticateeProcess(credential, client);
   spawn(process);
 

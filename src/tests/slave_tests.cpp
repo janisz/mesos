@@ -894,7 +894,7 @@ TEST_F(SlaveTest, DISABLED_ROOT_RunTaskWithCommandInfoWithUser)
   // TODO(nnielsen): Introduce STOUT abstraction for user verification
   // instead of flat getpwnam call.
   const string testUser = "nobody";
-  if (::getpwnam(testUser.c_str()) == NULL) {
+  if (::getpwnam(testUser.c_str()) == nullptr) {
     LOG(WARNING) << "Cannot run ROOT_RunTaskWithCommandInfoWithUser test:"
                  << " user '" << testUser << "' is not present";
     return;
@@ -2154,7 +2154,7 @@ TEST_F(SlaveTest, CancelSlaveShutdown)
   Clock::settle();
 
   // Reset the filters to allow pongs from the slave.
-  filter(NULL);
+  filter(nullptr);
 
   // Advance clock enough to do a ping pong.
   Clock::advance(masterFlags.slave_ping_timeout);

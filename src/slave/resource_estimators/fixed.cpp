@@ -78,7 +78,7 @@ public:
 
   virtual ~FixedResourceEstimator()
   {
-    if (process.get() != NULL) {
+    if (process.get() != nullptr) {
       terminate(process.get());
       wait(process.get());
     }
@@ -87,7 +87,7 @@ public:
   virtual Try<Nothing> initialize(
       const lambda::function<Future<ResourceUsage>()>& usage)
   {
-    if (process.get() != NULL) {
+    if (process.get() != nullptr) {
       return Error("Fixed resource estimator has already been initialized");
     }
 
@@ -99,7 +99,7 @@ public:
 
   virtual Future<Resources> oversubscribable()
   {
-    if (process.get() == NULL) {
+    if (process.get() == nullptr) {
       return Failure("Fixed resource estimator is not initialized");
     }
 

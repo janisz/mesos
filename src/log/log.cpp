@@ -205,7 +205,7 @@ LogProcess::LogProcess(
     replica(new Replica(path)),
     network(new Network(pids + (UPID) replica->pid())),
     autoInitialize(_autoInitialize),
-    group(NULL) {}
+    group(nullptr) {}
 
 
 LogProcess::LogProcess(
@@ -682,7 +682,7 @@ Future<Option<Log::Position> > LogWriterProcess::append(const string& bytes)
 {
   LOG(INFO) << "Attempting to append " << bytes.size() << " bytes to the log";
 
-  if (coordinator == NULL) {
+  if (coordinator == nullptr) {
     return Failure("No election has been performed");
   }
 

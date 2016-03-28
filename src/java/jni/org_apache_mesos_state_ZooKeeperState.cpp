@@ -104,7 +104,7 @@ JNIEXPORT void JNICALL Java_org_apache_mesos_state_ZooKeeperState_initialize__Lj
   string znode = construct<string>(env, jznode);
 
   // Create the C++ State.
-  Storage* storage = NULL;
+  Storage* storage = nullptr;
   if (jscheme != nullptr && jcredentials != nullptr) {
     string scheme = construct<string>(env, jscheme);
 
@@ -122,7 +122,7 @@ JNIEXPORT void JNICALL Java_org_apache_mesos_state_ZooKeeperState_initialize__Lj
     storage = new ZooKeeperStorage(servers, timeout, znode);
   }
 
-  CHECK(storage != NULL);
+  CHECK(storage != nullptr);
 
   State* state = new State(storage);
 

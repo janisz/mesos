@@ -241,7 +241,7 @@ void JNIExecutor::killTask(ExecutorDriver* driver, const TaskID& taskId)
 
 void JNIExecutor::frameworkMessage(ExecutorDriver* driver, const string& data)
 {
-  jvm->AttachCurrentThread(JNIENV_CAST(&env), NULL);
+  jvm->AttachCurrentThread(JNIENV_CAST(&env), nullptr);
 
   jclass clazz = env->GetObjectClass(jdriver);
 
@@ -310,7 +310,7 @@ void JNIExecutor::shutdown(ExecutorDriver* driver)
 
 void JNIExecutor::error(ExecutorDriver* driver, const string& message)
 {
-  jvm->AttachCurrentThread(JNIENV_CAST(&env), NULL);
+  jvm->AttachCurrentThread(JNIENV_CAST(&env), nullptr);
 
   jclass clazz = env->GetObjectClass(jdriver);
 

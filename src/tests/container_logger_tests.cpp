@@ -458,7 +458,7 @@ TEST_F(ContainerLoggerTest, LOGROTATE_RotateInSandbox)
   Try<os::ProcessTree> pstrees = os::pstree(0);
   ASSERT_SOME(pstrees);
   foreach (const os::ProcessTree& pstree, pstrees.get().children) {
-    ASSERT_EQ(pstree.process.pid, waitpid(pstree.process.pid, NULL, 0));
+    ASSERT_EQ(pstree.process.pid, waitpid(pstree.process.pid, nullptr, 0));
   }
 
   // Check for the expected log rotation.

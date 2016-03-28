@@ -297,7 +297,7 @@ TEST_F(ZooKeeperMasterContenderDetectorTest, ContenderPendingElection)
 
   EXPECT_TRUE(contended.isPending());
 
-  process::filter(NULL);
+  process::filter(nullptr);
 
   process::TestsFilter* filter =
     process::FilterTestEventListener::instance()->install();
@@ -426,7 +426,7 @@ TEST_F(ZooKeeperMasterContenderDetectorTest, NonRetryableFrrors)
                          "42",
                          (ACL_vector) {1, onlyCreatorCanAccess},
                          0,
-                         NULL);
+                         nullptr);
   ASSERT_ZK_GET("42", &authenticatedZk, "/test");
 
   // group3 cannot read the base path thus detector should fail.

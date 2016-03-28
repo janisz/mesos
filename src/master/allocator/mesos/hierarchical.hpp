@@ -73,8 +73,8 @@ public:
       initialized(false),
       paused(true),
       metrics(*this),
-      roleSorter(NULL),
-      quotaRoleSorter(NULL),
+      roleSorter(nullptr),
+      quotaRoleSorter(nullptr),
       roleSorterFactory(_roleSorterFactory),
       frameworkSorterFactory(_frameworkSorterFactory) {}
 

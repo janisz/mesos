@@ -621,7 +621,7 @@ Option<Error> validateSlave(
     Slave* slave = getSlave(master, offer->slave_id());
 
     // This is not possible because the offer should've been removed.
-    CHECK(slave != NULL)
+    CHECK(slave != nullptr)
       << "Offer " << offerId
       << " outlived slave " << offer->slave_id();
 

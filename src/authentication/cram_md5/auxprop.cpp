@@ -94,13 +94,13 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
   // flags (see below).
   const propval* properties = utils->prop_get(sparams->propctx);
 
-  CHECK(properties != NULL)
+  CHECK(properties != nullptr)
     << "Invalid auxiliary properties requested for lookup";
 
   // TODO(benh): Consider "parsing" 'user' if it has an '@' separating
   // the actual user and a realm.
 
-  string realm = sparams->user_realm != NULL
+  string realm = sparams->user_realm != nullptr
     ? sparams->user_realm
     : sparams->serverFQDN;
 
@@ -182,10 +182,10 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
 
     if (values.isSome()) {
       if (values.get().empty()) {
-        // Add the 'NULL' value to indicate there were no values.
+        // Add the 'nullptr' value to indicate there were no values.
         utils->prop_set(sparams->propctx, property->name, nullptr, 0);
       } else {
-        // Add all the values. Note that passing NULL as the property
+        // Add all the values. Note that passing nullptr as the property
         // name for 'prop_set' will append values to the same name as
         // the previous 'prop_set' calls which is the behavior we want
         // after adding the first value.
@@ -193,7 +193,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
         foreach (const string& value, values.get()) {
           sparams->utils->prop_set(
               sparams->propctx,
-              append ? NULL : property->name,
+              append ? nullptr : property->name,
               value.c_str(),
               -1); // Let 'prop_set' use strlen.
           append = true;

@@ -43,7 +43,7 @@ Try<Jvm*> Jvm::create(
     bool exceptions)
 {
   // TODO(benh): Make this thread-safe.
-  if (instance != NULL) {
+  if (instance != nullptr) {
     return Error("Java Virtual Machine already created");
   }
 
@@ -72,8 +72,8 @@ Try<Jvm*> Jvm::create(
   vmArgs.nOptions = options.size();
   vmArgs.options = opts;
 
-  JavaVM* jvm = NULL;
-  JNIEnv* env = NULL;
+  JavaVM* jvm = nullptr;
+  JNIEnv* env = nullptr;
   Option<std::string> libJvmPath = os::getenv("JAVA_JVM_LIBRARY");
 
   if (libJvmPath.isNone()) {

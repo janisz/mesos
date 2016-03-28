@@ -633,7 +633,7 @@ JNIEXPORT void JNICALL Java_org_apache_mesos_Log_initialize__ILjava_lang_String_
     log = new Log(quorum, path, servers, seconds, znode);
   }
 
-  CHECK(log != NULL);
+  CHECK(log != nullptr);
 
   // Initialize the __log variable.
   clazz = env->GetObjectClass(thiz);

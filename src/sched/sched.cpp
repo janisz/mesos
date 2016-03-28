@@ -214,7 +214,7 @@ public:
       flags(_flags),
       implicitAcknowledgements(_implicitAcknowledgements),
       credential(_credential),
-      authenticatee(NULL),
+      authenticatee(nullptr),
       authenticating(None()),
       authenticated(false),
       reauthenticate(false)
@@ -383,7 +383,7 @@ protected:
 
     CHECK_SOME(credential);
 
-    CHECK(authenticatee == NULL);
+    CHECK(authenticatee == nullptr);
 
     if (flags.authenticatee == scheduler::DEFAULT_AUTHENTICATEE) {
       LOG(INFO) << "Using default CRAM-MD5 authenticatee";
@@ -431,7 +431,7 @@ protected:
     }
 
     delete CHECK_NOTNULL(authenticatee);
-    authenticatee = NULL;
+    authenticatee = nullptr;
 
     CHECK_SOME(authenticating);
     const Future<bool>& future = authenticating.get();
@@ -1686,7 +1686,7 @@ void MesosSchedulerDriver::initialize() {
     pid = local::launch(flags);
   }
 
-  CHECK(process == NULL);
+  CHECK(process == nullptr);
 
   url = pid.isSome() ? static_cast<string>(pid.get()) : master;
 }
@@ -1710,14 +1710,14 @@ MesosSchedulerDriver::MesosSchedulerDriver(
     Scheduler* _scheduler,
     const FrameworkInfo& _framework,
     const string& _master)
-  : detector(NULL),
+  : detector(nullptr),
     scheduler(_scheduler),
     framework(_framework),
     master(_master),
-    process(NULL),
+    process(nullptr),
     status(DRIVER_NOT_STARTED),
     implicitAcknowlegements(true),
-    credential(NULL),
+    credential(nullptr),
     schedulerId("scheduler-" + UUID::random().toString())
 {
   initialize();
@@ -1729,11 +1729,11 @@ MesosSchedulerDriver::MesosSchedulerDriver(
     const FrameworkInfo& _framework,
     const string& _master,
     const Credential& _credential)
-  : detector(NULL),
+  : detector(nullptr),
     scheduler(_scheduler),
     framework(_framework),
     master(_master),
-    process(NULL),
+    process(nullptr),
     status(DRIVER_NOT_STARTED),
     implicitAcknowlegements(true),
     credential(new Credential(_credential)),
@@ -1748,14 +1748,14 @@ MesosSchedulerDriver::MesosSchedulerDriver(
     const FrameworkInfo& _framework,
     const string& _master,
     bool _implicitAcknowlegements)
-  : detector(NULL),
+  : detector(nullptr),
     scheduler(_scheduler),
     framework(_framework),
     master(_master),
-    process(NULL),
+    process(nullptr),
     status(DRIVER_NOT_STARTED),
     implicitAcknowlegements(_implicitAcknowlegements),
-    credential(NULL),
+    credential(nullptr),
     schedulerId("scheduler-" + UUID::random().toString())
 {
   initialize();
@@ -1768,11 +1768,11 @@ MesosSchedulerDriver::MesosSchedulerDriver(
     const string& _master,
     bool _implicitAcknowlegements,
     const Credential& _credential)
-  : detector(NULL),
+  : detector(nullptr),
     scheduler(_scheduler),
     framework(_framework),
     master(_master),
-    process(NULL),
+    process(nullptr),
     status(DRIVER_NOT_STARTED),
     implicitAcknowlegements(_implicitAcknowlegements),
     credential(new Credential(_credential)),
@@ -1799,7 +1799,7 @@ MesosSchedulerDriver::~MesosSchedulerDriver()
   // to the user somehow. It might make sense to try and add some more
   // debug output for the case where we wait indefinitely due to
   // deadlock.
-  if (process != NULL) {
+  if (process != nullptr) {
     // We call 'terminate()' here to ensure that SchedulerProcess
     // terminates even if the user forgot to call stop/abort on the
     // driver.
@@ -1826,7 +1826,7 @@ Status MesosSchedulerDriver::start()
       return status;
     }
 
-    if (detector == NULL) {
+    if (detector == nullptr) {
       Try<shared_ptr<MasterDetector>> detector_ = DetectorPool::get(url);
 
       if (detector_.isError()) {
@@ -1862,9 +1862,9 @@ Status MesosSchedulerDriver::start()
       }
     }
 
-    CHECK(process == NULL);
+    CHECK(process == nullptr);
 
-    if (credential == NULL) {
+    if (credential == nullptr) {
       process = new SchedulerProcess(
           this,
           scheduler,
@@ -1909,10 +1909,10 @@ Status MesosSchedulerDriver::stop(bool failover)
       return status;
     }
 
-    // 'process' might be NULL if the driver has failed to instantiate
+    // 'process' might be nullptr if the driver has failed to instantiate
     // it due to bad parameters (e.g. error in creating the detector
     // or loading flags).
-    if (process != NULL) {
+    if (process != nullptr) {
       process->running.store(false);
       dispatch(process, &SchedulerProcess::stop, failover);
     }
@@ -1962,7 +1962,7 @@ Status MesosSchedulerDriver::join()
   // started properly. If it wasn't, we return the current status
   // (which should either be DRIVER_NOT_STARTED or DRIVER_ABORTED).
   synchronized (mutex) {
-    if (process == NULL) {
+    if (process == nullptr) {
       CHECK(status == DRIVER_NOT_STARTED || status == DRIVER_ABORTED);
 
       return status;
@@ -1994,7 +1994,7 @@ Status MesosSchedulerDriver::killTask(const TaskID& taskId)
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::killTask, taskId);
 
@@ -2025,7 +2025,7 @@ Status MesosSchedulerDriver::launchTasks(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::launchTasks, offerIds, tasks, filters);
 
@@ -2044,7 +2044,7 @@ Status MesosSchedulerDriver::acceptOffers(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(
         process,
@@ -2067,7 +2067,7 @@ Status MesosSchedulerDriver::declineOffer(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(
         process,
@@ -2087,7 +2087,7 @@ Status MesosSchedulerDriver::reviveOffers()
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::reviveOffers);
 
@@ -2103,7 +2103,7 @@ Status MesosSchedulerDriver::suppressOffers()
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::suppressOffers);
 
@@ -2126,7 +2126,7 @@ Status MesosSchedulerDriver::acknowledgeStatusUpdate(
             " Implicit acknowledgements are enabled");
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::acknowledgeStatusUpdate, taskStatus);
 
@@ -2145,7 +2145,7 @@ Status MesosSchedulerDriver::sendFrameworkMessage(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::sendFrameworkMessage,
             executorId, slaveId, data);
@@ -2163,7 +2163,7 @@ Status MesosSchedulerDriver::reconcileTasks(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::reconcileTasks, statuses);
 
@@ -2180,7 +2180,7 @@ Status MesosSchedulerDriver::requestResources(
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &SchedulerProcess::requestResources, requests);
 

@@ -112,7 +112,7 @@ namespace mesos {
 namespace internal {
 namespace local {
 
-static Allocator* allocator = NULL;
+static Allocator* allocator = nullptr;
 static Log* log = nullptr;
 static state::Storage* storage = nullptr;
 static state::protobuf::State* state = nullptr;
@@ -124,20 +124,20 @@ static StandaloneMasterDetector* detector = nullptr;
 static MasterContender* contender = nullptr;
 static Option<Authorizer*> authorizer_ = None();
 static Files* files = nullptr;
-static vector<GarbageCollector*>* garbageCollectors = NULL;
-static vector<StatusUpdateManager*>* statusUpdateManagers = NULL;
-static vector<Fetcher*>* fetchers = NULL;
-static vector<ResourceEstimator*>* resourceEstimators = NULL;
-static vector<QoSController*>* qosControllers = NULL;
+static vector<GarbageCollector*>* garbageCollectors = nullptr;
+static vector<StatusUpdateManager*>* statusUpdateManagers = nullptr;
+static vector<Fetcher*>* fetchers = nullptr;
+static vector<ResourceEstimator*>* resourceEstimators = nullptr;
+static vector<QoSController*>* qosControllers = nullptr;
 
 
 PID<Master> launch(const Flags& flags, Allocator* _allocator)
 {
-  if (master != NULL) {
+  if (master != nullptr) {
     LOG(FATAL) << "Can only launch one local cluster at a time (for now)";
   }
 
-  if (_allocator == NULL) {
+  if (_allocator == nullptr) {
     // Create a default allocator.
     Try<Allocator*> defaultAllocator = HierarchicalDRFAllocator::create();
     if (defaultAllocator.isError()) {
@@ -154,7 +154,7 @@ PID<Master> launch(const Flags& flags, Allocator* _allocator)
   } else {
     // TODO(benh): Figure out the behavior of allocator pointer and remove the
     // else block.
-    allocator = NULL;
+    allocator = nullptr;
   }
 
   files = new Files();
@@ -442,35 +442,35 @@ void shutdown()
     }
 
     delete garbageCollectors;
-    garbageCollectors = NULL;
+    garbageCollectors = nullptr;
 
     foreach (StatusUpdateManager* statusUpdateManager, *statusUpdateManagers) {
       delete statusUpdateManager;
     }
 
     delete statusUpdateManagers;
-    statusUpdateManagers = NULL;
+    statusUpdateManagers = nullptr;
 
     foreach (Fetcher* fetcher, *fetchers) {
       delete fetcher;
     }
 
     delete fetchers;
-    fetchers = NULL;
+    fetchers = nullptr;
 
     foreach (ResourceEstimator* estimator, *resourceEstimators) {
       delete estimator;
     }
 
     delete resourceEstimators;
-    resourceEstimators = NULL;
+    resourceEstimators = nullptr;
 
     foreach (QoSController* controller, *qosControllers) {
       delete controller;
     }
 
     delete qosControllers;
-    qosControllers = NULL;
+    qosControllers = nullptr;
 
     delete registrar;
     registrar = nullptr;

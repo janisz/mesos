@@ -77,7 +77,7 @@ public:
       }
 
       Module<T>* module = (Module<T>*) moduleBases[moduleName];
-      if (module->create == NULL) {
+      if (module->create == nullptr) {
         return Error(
             "Error creating module instance for '" + moduleName + "': "
             "create() method not found");
@@ -94,7 +94,7 @@ public:
       T* instance =
         module->create(
             params.isSome() ? params.get() : moduleParameters[moduleName]);
-      if (instance == NULL) {
+      if (instance == nullptr) {
         return Error("Error creating Module instance for '" + moduleName + "'");
       }
       return instance;

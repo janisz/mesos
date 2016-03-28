@@ -731,7 +731,7 @@ Mesos::Mesos(
 
 Mesos::~Mesos()
 {
-  if (process != NULL) {
+  if (process != nullptr) {
     stop();
   }
 }
@@ -745,12 +745,12 @@ void Mesos::send(const Call& call)
 
 void Mesos::stop()
 {
-  if (process != NULL) {
+  if (process != nullptr) {
     terminate(process);
     wait(process);
 
     delete process;
-    process = NULL;
+    process = nullptr;
   }
 }
 

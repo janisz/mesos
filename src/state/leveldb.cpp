@@ -79,12 +79,12 @@ private:
 
 
 LevelDBStorageProcess::LevelDBStorageProcess(const string& _path)
-  : path(_path), db(NULL) {}
+  : path(_path), db(nullptr) {}
 
 
 LevelDBStorageProcess::~LevelDBStorageProcess()
 {
-  delete db; // NULL if open failed in LevelDBStorageProcess::initialize.
+  delete db; // nullptr if open failed in LevelDBStorageProcess::initialize.
 }
 
 

@@ -83,5 +83,5 @@ mesos::modules::Module<Isolator> org_apache_mesos_TestMemIsolator(
     "Apache Mesos",
     "modules@mesos.apache.org",
     "Test Memory Isolator module.",
-    NULL, // Do not perform any compatibility check.
+    nullptr, // Do not perform any compatibility check.
     createMemIsolator);

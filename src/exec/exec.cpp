@@ -588,7 +588,7 @@ private:
 
 MesosExecutorDriver::MesosExecutorDriver(Executor* _executor)
   : executor(_executor),
-    process(NULL),
+    process(nullptr),
     status(DRIVER_NOT_STARTED)
 {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -745,7 +745,7 @@ Status MesosExecutorDriver::start()
       }
     }
 
-    CHECK(process == NULL);
+    CHECK(process == nullptr);
 
     process = new ExecutorProcess(
         slave,
@@ -776,7 +776,7 @@ Status MesosExecutorDriver::stop()
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &ExecutorProcess::stop);
 
@@ -796,7 +796,7 @@ Status MesosExecutorDriver::abort()
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     // We set the atomic aborted to true here to prevent any further
     // messages from being processed in the ExecutorProcess. However,
@@ -851,7 +851,7 @@ Status MesosExecutorDriver::sendStatusUpdate(const TaskStatus& taskStatus)
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &ExecutorProcess::sendStatusUpdate, taskStatus);
 
@@ -867,7 +867,7 @@ Status MesosExecutorDriver::sendFrameworkMessage(const string& data)
       return status;
     }
 
-    CHECK(process != NULL);
+    CHECK(process != nullptr);
 
     dispatch(process, &ExecutorProcess::sendFrameworkMessage, data);
 

@@ -185,7 +185,7 @@ void JNIScheduler::disconnected(SchedulerDriver* driver)
 void JNIScheduler::resourceOffers(SchedulerDriver* driver,
                                   const vector<Offer>& offers)
 {
-  jvm->AttachCurrentThread(JNIENV_CAST(&env), NULL);
+  jvm->AttachCurrentThread(JNIENV_CAST(&env), nullptr);
 
   jclass clazz = env->GetObjectClass(jdriver);
 
@@ -307,7 +307,7 @@ void JNIScheduler::frameworkMessage(SchedulerDriver* driver,
                                     const SlaveID& slaveId,
                                     const string& data)
 {
-  jvm->AttachCurrentThread(JNIENV_CAST(&env), NULL);
+  jvm->AttachCurrentThread(JNIENV_CAST(&env), nullptr);
 
   jclass clazz = env->GetObjectClass(jdriver);
 
@@ -429,7 +429,7 @@ void JNIScheduler::executorLost(SchedulerDriver* driver,
 
 void JNIScheduler::error(SchedulerDriver* driver, const string& message)
 {
-  jvm->AttachCurrentThread(JNIENV_CAST(&env), NULL);
+  jvm->AttachCurrentThread(JNIENV_CAST(&env), nullptr);
 
   jclass clazz = env->GetObjectClass(jdriver);
 

@@ -95,7 +95,7 @@ public:
     if (strings::contains(test->test_case_name(), pattern) ||
         strings::contains(test->name(), pattern)) {
       return true;
-    } else if (test->type_param() != NULL &&
+    } else if (test->type_param() != nullptr &&
                strings::contains(test->type_param(), pattern)) {
       return true;
     }
@@ -798,7 +798,7 @@ Try<string> Environment::mkdtemp()
   const ::testing::TestInfo* const testInfo =
     ::testing::UnitTest::GetInstance()->current_test_info();
 
-  if (testInfo == NULL) {
+  if (testInfo == nullptr) {
     return Error("Failed to determine the current test information");
   }
 

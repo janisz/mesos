@@ -128,7 +128,7 @@ Future<Nothing> BindBackendProcess::provision(
       rootfs,
       None(),
       MS_BIND,
-      NULL);
+      nullptr);
 
   if (mount.isError()) {
     return Failure(
@@ -142,7 +142,7 @@ Future<Nothing> BindBackendProcess::provision(
       rootfs,
       None(),
       MS_BIND | MS_RDONLY | MS_REMOUNT,
-      NULL);
+      nullptr);
 
   if (mount.isError()) {
     return Failure(
@@ -156,7 +156,7 @@ Future<Nothing> BindBackendProcess::provision(
       rootfs,
       None(),
       MS_SLAVE,
-      NULL);
+      nullptr);
 
   if (mount.isError()) {
     return Failure(
@@ -169,7 +169,7 @@ Future<Nothing> BindBackendProcess::provision(
       rootfs,
       None(),
       MS_SHARED,
-      NULL);
+      nullptr);
 
   if (mount.isError()) {
     return Failure(

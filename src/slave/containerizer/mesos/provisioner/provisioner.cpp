@@ -101,7 +101,7 @@ Provisioner::Provisioner(Owned<ProvisionerProcess> _process)
 
 Provisioner::~Provisioner()
 {
-  if (process.get() != NULL) {
+  if (process.get() != nullptr) {
     terminate(process.get());
     wait(process.get());
   }

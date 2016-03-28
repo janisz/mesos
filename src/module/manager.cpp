@@ -129,12 +129,12 @@ Try<Nothing> ModuleManager::verifyModule(
     const ModuleBase* moduleBase)
 {
   CHECK_NOTNULL(moduleBase);
-  if (moduleBase->mesosVersion == NULL ||
-      moduleBase->moduleApiVersion == NULL ||
-      moduleBase->authorName == NULL ||
-      moduleBase->authorEmail == NULL ||
-      moduleBase->description == NULL ||
-      moduleBase->kind == NULL) {
+  if (moduleBase->mesosVersion == nullptr ||
+      moduleBase->moduleApiVersion == nullptr ||
+      moduleBase->authorName == nullptr ||
+      moduleBase->authorEmail == nullptr ||
+      moduleBase->description == nullptr ||
+      moduleBase->kind == nullptr) {
     return Error("Error loading module '" + moduleName + "'; missing fields");
   }
 
@@ -167,7 +167,7 @@ Try<Nothing> ModuleManager::verifyModule(
         "with version " + stringify(moduleMesosVersion.get()));
   }
 
-  if (moduleBase->compatible == NULL) {
+  if (moduleBase->compatible == nullptr) {
     if (moduleMesosVersion.get() != mesosVersion.get()) {
       return Error(
           "Mesos has version " + stringify(mesosVersion.get()) +

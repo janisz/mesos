@@ -281,7 +281,7 @@ public:
   static void TearDownTestCase()
   {
     delete server;
-    server = NULL;
+    server = nullptr;
   }
 
   virtual void SetUp()

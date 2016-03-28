@@ -2373,7 +2373,7 @@ PortMappingIsolatorProcess::_recover(pid_t pid)
     }
   }
 
-  Info* info = NULL;
+  Info* info = nullptr;
 
   if (ephemeralPorts.empty()) {
     // NOTE: This is possible because the slave may crash while
@@ -2519,7 +2519,7 @@ Future<Nothing> PortMappingIsolatorProcess::isolate(
     return Failure("Failed to create the bind mount point: " + touch.error());
   }
 
-  Try<Nothing> mount = fs::mount(source, target, None(), MS_BIND, NULL);
+  Try<Nothing> mount = fs::mount(source, target, None(), MS_BIND, nullptr);
   if (mount.isError()) {
     return Failure(
         "Failed to mount the network namespace handle from '" +
