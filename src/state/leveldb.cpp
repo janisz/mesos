@@ -100,7 +100,7 @@ void LevelDBStorageProcess::initialize()
     error = status.ToString();
   } else {
     // TODO(benh): Conditionally compact to avoid long recovery times?
-    db->CompactRange(NULL, NULL);
+    db->CompactRange(nullptr, nullptr);
   }
 }
 

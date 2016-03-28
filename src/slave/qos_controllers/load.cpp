@@ -202,7 +202,7 @@ static QoSController* create(const Parameters& parameters)
 
   if (loadThreshold5Min.isNone() && loadThreshold15Min.isNone()) {
     LOG(ERROR) << "No load thresholds are configured for LoadQoSController";
-    return NULL;
+    return nullptr;
   }
 
   return new mesos::internal::slave::LoadQoSController(

@@ -261,8 +261,8 @@ int main(int argc, char** argv)
   CHECK_NOTNULL(allocator.get());
   LOG(INFO) << "Using '" << allocatorName << "' allocator";
 
-  state::Storage* storage = NULL;
-  Log* log = NULL;
+  state::Storage* storage = nullptr;
+  Log* log = nullptr;
 
   if (flags.registry == "in_memory") {
     if (flags.registry_strict) {

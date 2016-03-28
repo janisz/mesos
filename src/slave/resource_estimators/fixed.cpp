@@ -129,7 +129,7 @@ static ResourceEstimator* create(const Parameters& parameters)
     if (parameter.key() == "resources") {
       Try<Resources> _resources = Resources::parse(parameter.value());
       if (_resources.isError()) {
-        return NULL;
+        return nullptr;
       }
 
       resources = _resources.get();
@@ -137,7 +137,7 @@ static ResourceEstimator* create(const Parameters& parameters)
   }
 
   if (resources.isNone()) {
-    return NULL;
+    return nullptr;
   }
 
   return new FixedResourceEstimator(resources.get());

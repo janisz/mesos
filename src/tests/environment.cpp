@@ -728,7 +728,7 @@ void Environment::SetUp()
 {
   // Clear any MESOS_ environment variables so they don't affect our tests.
   char** environ = os::raw::environment();
-  for (int i = 0; environ[i] != NULL; i++) {
+  for (int i = 0; environ[i] != nullptr; i++) {
     string variable = environ[i];
     if (variable.find("MESOS_") == 0) {
       string key;

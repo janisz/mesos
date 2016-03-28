@@ -590,7 +590,7 @@ Option<Error> validateFramework(
 {
   foreach (const OfferID& offerId, offerIds) {
     Offer* offer = getOffer(master, offerId);
-    if (offer == NULL) {
+    if (offer == nullptr) {
       return Error("Offer " + stringify(offerId) + " is no longer valid");
     }
 
@@ -614,7 +614,7 @@ Option<Error> validateSlave(
 
   foreach (const OfferID& offerId, offerIds) {
     Offer* offer = getOffer(master, offerId);
-    if (offer == NULL) {
+    if (offer == nullptr) {
       return Error("Offer " + stringify(offerId) + " is no longer valid");
     }
 

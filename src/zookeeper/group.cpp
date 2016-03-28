@@ -118,8 +118,8 @@ GroupProcess::GroupProcess(
     acl(url.authentication.isSome()
         ? EVERYONE_READ_CREATOR_ALL
         : ZOO_OPEN_ACL_UNSAFE),
-    watcher(NULL),
-    zk(NULL),
+    watcher(nullptr),
+    zk(nullptr),
     state(DISCONNECTED),
     retrying(false)
 {}

@@ -83,7 +83,7 @@ static Try<void*> allocateRSS(const Bytes& size)
   }
 #endif
 
-  void* rss = NULL;
+  void* rss = nullptr;
   if (posix_memalign(&rss, getpagesize(), size.bytes()) != 0) {
     return ErrnoError("Failed to increase RSS memory, posix_memalign");
   }

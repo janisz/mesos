@@ -55,7 +55,7 @@ public:
     : ProcessBase(ID::generate("zookeeper")),
       servers(servers),
       sessionTimeout(sessionTimeout),
-      zh(NULL)
+      zh(nullptr)
   {
     // We bind the Watcher::process callback so we can pass it to the
     // C callback as a pointer and invoke it directly.
@@ -118,7 +118,7 @@ public:
       //   (2) Any getaddrinfo error other than EAI_NONAME,
       //       EAI_NODATA, and EAI_MEMORY are mapped to EINVAL.
       // Either way, retrying is not problematic.
-      if (zh == NULL && errno == EINVAL) {
+      if (zh == nullptr && errno == EINVAL) {
         ErrnoError error("zookeeper_init failed");
         LOG(WARNING) << error.message << " ; retrying in 1 second";
         os::sleep(Seconds(1));
@@ -128,7 +128,7 @@ public:
       break;
     }
 
-    if (zh == NULL) {
+    if (zh == nullptr) {
       PLOG(FATAL) << "Failed to create ZooKeeper, zookeeper_init";
     }
   }
@@ -464,7 +464,7 @@ private:
     Stat *stat_result = std::get<1>(*args);
 
     if (ret == 0) {
-      if (stat_result != NULL) {
+      if (stat_result != nullptr) {
         *stat_result = *stat;
       }
     }
@@ -494,7 +494,7 @@ private:
         result->assign(value, value_len);
       }
 
-      if (stat_result != NULL) {
+      if (stat_result != nullptr) {
         *stat_result = *stat;
       }
     }

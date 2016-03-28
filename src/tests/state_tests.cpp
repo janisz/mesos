@@ -328,8 +328,8 @@ class InMemoryStateTest : public ::testing::Test
 {
 public:
   InMemoryStateTest()
-    : storage(NULL),
-      state(NULL) {}
+    : storage(nullptr),
+      state(nullptr) {}
 
 protected:
   virtual void SetUp()
@@ -395,8 +395,8 @@ class LevelDBStateTest : public TemporaryDirectoryTest
 {
 public:
   LevelDBStateTest()
-    : storage(NULL),
-      state(NULL) {}
+    : storage(nullptr),
+      state(nullptr) {}
 
 protected:
   virtual void SetUp()
@@ -472,10 +472,10 @@ class LogStateTest : public TemporaryDirectoryTest
 {
 public:
   LogStateTest()
-    : storage(NULL),
-      state(NULL),
-      replica2(NULL),
-      log(NULL) {}
+    : storage(nullptr),
+      state(nullptr),
+      replica2(nullptr),
+      log(nullptr) {}
 
 protected:
   virtual void SetUp()
@@ -693,8 +693,8 @@ class ZooKeeperStateTest : public tests::ZooKeeperTest
 {
 public:
   ZooKeeperStateTest()
-    : storage(NULL),
-      state(NULL) {}
+    : storage(nullptr),
+      state(nullptr) {}
 
 protected:
   virtual void SetUp()

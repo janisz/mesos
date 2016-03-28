@@ -60,7 +60,7 @@ public:
       credential(_credential),
       client(_client),
       status(READY),
-      connection(NULL)
+      connection(nullptr)
   {
     const char* data = credential.secret().data();
     size_t length = credential.secret().length();
@@ -77,7 +77,7 @@ public:
 
   virtual ~CRAMMD5AuthenticateeProcess()
   {
-    if (connection != NULL) {
+    if (connection != nullptr) {
       sasl_dispose(&connection);
     }
     free(secret);
@@ -95,7 +95,7 @@ public:
 
     if (!initialize->once()) {
       LOG(INFO) << "Initializing client SASL";
-      int result = sasl_client_init(NULL);
+      int result = sasl_client_init(nullptr);
       if (result != SASL_OK) {
         status = ERROR;
         string error(sasl_errstring(result, NULL, NULL));
@@ -121,8 +121,8 @@ public:
     LOG(INFO) << "Creating new client SASL connection";
 
     callbacks[0].id = SASL_CB_GETREALM;
-    callbacks[0].proc = NULL;
-    callbacks[0].context = NULL;
+    callbacks[0].proc = nullptr;
+    callbacks[0].context = nullptr;
 
     callbacks[1].id = SASL_CB_USER;
     callbacks[1].proc = (int(*)()) &user;
@@ -144,13 +144,13 @@ public:
     callbacks[3].context = (void*) secret;
 
     callbacks[4].id = SASL_CB_LIST_END;
-    callbacks[4].proc = NULL;
-    callbacks[4].context = NULL;
+    callbacks[4].proc = nullptr;
+    callbacks[4].context = nullptr;
 
     int result = sasl_client_new(
         "mesos",    // Registered name of service.
-        NULL,       // Server's FQDN.
-        NULL, NULL, // IP Address information strings.
+        nullptr,       // Server's FQDN.
+        nullptr, nullptr, // IP Address information strings.
         callbacks,  // Callbacks supported only for this connection.
         0,          // Security flags (security layers are enabled
                     // using security properties, separately).
@@ -212,10 +212,10 @@ protected:
     LOG(INFO) << "Received SASL authentication mechanisms: "
               << strings::join(",", mechanisms);
 
-    sasl_interact_t* interact = NULL;
-    const char* output = NULL;
+    sasl_interact_t* interact = nullptr;
+    const char* output = nullptr;
     unsigned length = 0;
-    const char* mechanism = NULL;
+    const char* mechanism = nullptr;
 
     int result = sasl_client_start(
         connection,
@@ -257,8 +257,8 @@ protected:
 
     LOG(INFO) << "Received SASL authentication step";
 
-    sasl_interact_t* interact = NULL;
-    const char* output = NULL;
+    sasl_interact_t* interact = nullptr;
+    const char* output = nullptr;
     unsigned length = 0;
 
     int result = sasl_client_step(
@@ -276,7 +276,7 @@ protected:
       // We don't start the client with SASL_SUCCESS_DATA so we may
       // need to send one more "empty" message to the server.
       AuthenticationStepMessage message;
-      if (output != NULL && length > 0) {
+      if (output != nullptr && length > 0) {
         message.set_data(output, length);
       }
       reply(message);
@@ -328,7 +328,7 @@ private:
   {
     CHECK(SASL_CB_USER == id || SASL_CB_AUTHNAME == id);
     *result = static_cast<const char*>(context);
-    if (length != NULL) {
+    if (length != nullptr) {
       *length = strlen(*result);
     }
     return SASL_OK;
@@ -377,12 +377,12 @@ Try<Authenticatee*> CRAMMD5Authenticatee::create()
 }
 
 
-CRAMMD5Authenticatee::CRAMMD5Authenticatee() : process(NULL) {}
+CRAMMD5Authenticatee::CRAMMD5Authenticatee() : process(nullptr) {}
 
 
 CRAMMD5Authenticatee::~CRAMMD5Authenticatee()
 {
-  if (process != NULL) {
+  if (process != nullptr) {
     terminate(process);
     wait(process);
     delete process;

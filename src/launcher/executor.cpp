@@ -310,7 +310,7 @@ public:
       char** argv = override.get();
       // argv is guaranteed to be NULL terminated and we rely on
       // that fact to print command to be executed.
-      for (int i = 0; argv[i] != NULL; i++) {
+      for (int i = 0; argv[i] != nullptr; i++) {
         commandString += string(argv[i]) + " ";
       }
     } else if (command.shell()) {

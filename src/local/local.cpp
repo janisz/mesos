@@ -113,17 +113,17 @@ namespace internal {
 namespace local {
 
 static Allocator* allocator = NULL;
-static Log* log = NULL;
-static state::Storage* storage = NULL;
-static state::protobuf::State* state = NULL;
-static Registrar* registrar = NULL;
-static Repairer* repairer = NULL;
-static Master* master = NULL;
+static Log* log = nullptr;
+static state::Storage* storage = nullptr;
+static state::protobuf::State* state = nullptr;
+static Registrar* registrar = nullptr;
+static Repairer* repairer = nullptr;
+static Master* master = nullptr;
 static map<Containerizer*, Slave*> slaves;
-static StandaloneMasterDetector* detector = NULL;
-static MasterContender* contender = NULL;
+static StandaloneMasterDetector* detector = nullptr;
+static MasterContender* contender = nullptr;
 static Option<Authorizer*> authorizer_ = None();
-static Files* files = NULL;
+static Files* files = nullptr;
 static vector<GarbageCollector*>* garbageCollectors = NULL;
 static vector<StatusUpdateManager*>* statusUpdateManagers = NULL;
 static vector<Fetcher*>* fetchers = NULL;
@@ -401,12 +401,12 @@ PID<Master> launch(const Flags& flags, Allocator* _allocator)
 
 void shutdown()
 {
-  if (master != NULL) {
+  if (master != nullptr) {
     process::terminate(master->self());
     process::wait(master->self());
     delete master;
     delete allocator;
-    master = NULL;
+    master = nullptr;
 
     // TODO(benh): Ugh! Because the isolator calls back into the slave
     // (not the best design) we can't delete the slave until we have
@@ -429,13 +429,13 @@ void shutdown()
     }
 
     delete detector;
-    detector = NULL;
+    detector = nullptr;
 
     delete contender;
-    contender = NULL;
+    contender = nullptr;
 
     delete files;
-    files = NULL;
+    files = nullptr;
 
     foreach (GarbageCollector* gc, *garbageCollectors) {
       delete gc;
@@ -473,19 +473,19 @@ void shutdown()
     qosControllers = NULL;
 
     delete registrar;
-    registrar = NULL;
+    registrar = nullptr;
 
     delete repairer;
-    repairer = NULL;
+    repairer = nullptr;
 
     delete state;
-    state = NULL;
+    state = nullptr;
 
     delete storage;
-    storage = NULL;
+    storage = nullptr;
 
     delete log;
-    log = NULL;
+    log = nullptr;
   }
 }
 

@@ -126,7 +126,7 @@ MasterContender::~MasterContender() {}
 
 StandaloneMasterContender::~StandaloneMasterContender()
 {
-  if (promise != NULL) {
+  if (promise != nullptr) {
     promise->set(Nothing()); // Leadership lost.
     delete promise;
   }
@@ -148,7 +148,7 @@ Future<Future<Nothing> > StandaloneMasterContender::contend()
     return Failure("Initialize the contender first");
   }
 
-  if (promise != NULL) {
+  if (promise != nullptr) {
     LOG(INFO) << "Withdrawing the previous membership before recontending";
     promise->set(Nothing());
     delete promise;
@@ -206,7 +206,7 @@ ZooKeeperMasterContenderProcess::ZooKeeperMasterContenderProcess(
     Owned<Group> _group)
   : ProcessBase(ID::generate("zookeeper-master-contender")),
     group(_group),
-    contender(NULL) {}
+    contender(nullptr) {}
 
 
 ZooKeeperMasterContenderProcess::~ZooKeeperMasterContenderProcess()
@@ -231,7 +231,7 @@ Future<Future<Nothing> > ZooKeeperMasterContenderProcess::contend()
     return candidacy.get();
   }
 
-  if (contender != NULL) {
+  if (contender != nullptr) {
     LOG(INFO) << "Withdrawing the previous membership before recontending";
     delete contender;
   }

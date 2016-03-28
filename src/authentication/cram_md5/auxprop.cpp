@@ -47,7 +47,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
     sasl_auxprop_plug_t** plug,
     const char* name)
 {
-  if (version == NULL || plug == NULL) {
+  if (version == nullptr || plug == nullptr) {
     return SASL_BADPARAM;
   }
 
@@ -60,11 +60,11 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
 
   plugin.features = 0;
   plugin.spare_int1 = 0;
-  plugin.glob_context = NULL;
-  plugin.auxprop_free = NULL;
+  plugin.glob_context = nullptr;
+  plugin.auxprop_free = nullptr;
   plugin.auxprop_lookup = &InMemoryAuxiliaryPropertyPlugin::lookup;
   plugin.name = const_cast<char*>(InMemoryAuxiliaryPropertyPlugin::name());
-  plugin.auxprop_store = NULL;
+  plugin.auxprop_store = nullptr;
 
   *plug = &plugin;
 
@@ -120,7 +120,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
 
   // Now iterate through each property requested.
   const propval* property = properties;
-  for (; property->name != NULL; property++) {
+  for (; property->name != nullptr; property++) {
     const char* name = property->name;
 
     // Skip properties that don't apply to this lookup given the flags.
@@ -145,7 +145,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
     }
 
     // Don't override already set values unless instructed otherwise.
-    if (property->values != NULL && !(flags & SASL_AUXPROP_OVERRIDE)) {
+    if (property->values != nullptr && !(flags & SASL_AUXPROP_OVERRIDE)) {
 #ifdef SASL_AUXPROP_VERIFY_AGAINST_HASH
       // Regardless of SASL_AUXPROP_OVERRIDE we're expected to
       // override property 'userPassword' when the
@@ -169,7 +169,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
               << "and value(s) already set";
       continue;
 #endif
-    } else if (property->values != NULL) {
+    } else if (property->values != nullptr) {
       CHECK(flags & SASL_AUXPROP_OVERRIDE);
       VLOG(1) << "Erasing auxiliary property '" << name
               << "' since SASL_AUXPROP_OVERRIDE == true";
@@ -183,7 +183,7 @@ int InMemoryAuxiliaryPropertyPlugin::initialize(
     if (values.isSome()) {
       if (values.get().empty()) {
         // Add the 'NULL' value to indicate there were no values.
-        utils->prop_set(sparams->propctx, property->name, NULL, 0);
+        utils->prop_set(sparams->propctx, property->name, nullptr, 0);
       } else {
         // Add all the values. Note that passing NULL as the property
         // name for 'prop_set' will append values to the same name as

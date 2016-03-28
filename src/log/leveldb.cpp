@@ -127,7 +127,7 @@ static string encode(uint64_t position, bool adjust = true)
 
 
 LevelDBStorage::LevelDBStorage()
-  : db(NULL), first(None())
+  : db(nullptr), first(None())
 {
   // Nothing to see here.
 }

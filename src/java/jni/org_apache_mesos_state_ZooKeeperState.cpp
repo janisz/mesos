@@ -105,10 +105,10 @@ JNIEXPORT void JNICALL Java_org_apache_mesos_state_ZooKeeperState_initialize__Lj
 
   // Create the C++ State.
   Storage* storage = NULL;
-  if (jscheme != NULL && jcredentials != NULL) {
+  if (jscheme != nullptr && jcredentials != nullptr) {
     string scheme = construct<string>(env, jscheme);
 
-    jbyte* temp = env->GetByteArrayElements(jcredentials, NULL);
+    jbyte* temp = env->GetByteArrayElements(jcredentials, nullptr);
     jsize length = env->GetArrayLength(jcredentials);
 
     string credentials((char*) temp, (size_t) length);

@@ -388,7 +388,7 @@ LocalAuthorizer::LocalAuthorizer(const ACLs& acls)
 
 LocalAuthorizer::~LocalAuthorizer()
 {
-  if (process != NULL) {
+  if (process != nullptr) {
     terminate(process);
     wait(process);
     delete process;

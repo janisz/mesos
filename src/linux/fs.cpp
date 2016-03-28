@@ -290,7 +290,7 @@ Try<FileSystemTable> FileSystemTable::read()
 
     while (true) {
       struct fstab* fstab = ::getfsent();
-      if (fstab == NULL) {
+      if (fstab == nullptr) {
         break; // NULL means the end of enties.
       }
 
