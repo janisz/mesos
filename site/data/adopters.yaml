@@ -1,0 +1,202 @@
+---
+adopters:
+- name: Airbnb
+  site: http://www.airbnb.com
+- name: Allegro
+  site: http://allegrotech.io
+- name: Altocloud
+  site: http://www.altocloud.com/
+- name: Apple
+  site: http://www.apple.com
+- name: Artirix
+  site: http://www.artirix.com
+- name: Astronomer
+  site: http://www.astronomer.io
+- name: Atigeo
+  site: http://www.atigeo.com
+- name: Atlassian
+  site: http://www.atlassian.com
+- name: Auchan Ecommerce France
+  site: http://www.auchan.fr
+- name: Blue Yonder
+  site: http://www.blue-yonder.com
+- name: Bol.com
+  site: http://www.bol.com
+- name: Branding Brand
+  site: http://www.brandingbrand.com
+- name: Brigade
+  site: http://www.brigade.com
+- name: Categorize
+  site: http://categorize.co
+- name: CERN
+  site: http://cern.ch
+- name: Cisco
+  site: http://www.cisco.com
+- name: CloudPhysics
+  site: http://cloudphysics.com
+- name: CMCRC
+  site: http://www.cmcrc.com
+- name: Conviva
+  site: http://www.conviva.com
+- name: CorvisaCloud
+  site: http://www.corvisacloud.com/
+- name: Coursera
+  site: https://www.coursera.org
+- name: Criteo
+  site: http://www.criteo.com
+- name: CRP-Gabriel Lippmann
+  site: http://www.crpgl.lu
+- name: Daemon
+  site: http://www.daemon.com.au
+- name: DataMan
+  site: http://www.dataman-inc.com
+- name: Delivery Hero Holding GmbH
+  site: http://www.deliveryhero.com
+- name: Devicescape
+  site: http://www.devicescape.com
+- name: DueDil
+  site: http://www.duedil.com
+- name: eBay
+  site: http://www.ebay.com
+- name: Ericsson
+  site: http://www.ericsson.com/
+- name: Football Radar
+  site: http://www.footballradar.com
+- name: Foursquare
+  site: http://www.foursquare.com
+- name: GenOuest
+  site: http://www.genouest.org
+- name: GoCardless
+  site: http://www.gocardless.com
+- name: Groupon
+  site: http://www.groupon.com
+- name: GSShop
+  site: http://www.gsshop.com
+- name: Gutefrage.net
+  site: http://www.gutefrage.net
+- name: Hootsuite
+  site: https://hootsuite.com
+- name: HubSpot
+  site: http://www.hubspot.com
+- name: Ignidata
+  site: http://www.ignidata.com
+- name: Jobrapido
+  site: http://www.jobrapido.com
+- name: iQIYI
+  site: http://www.iqiyi.com/
+- name: Learnium
+  site: http://www.learnium.net/
+- name: LIFX
+  site: http://lifx.co
+- name: Linkernetworks
+  site: http://www.linkernetworks.com
+- name: Livespotting Media
+  site: http://www.livespottingmedia.com
+- name: Localsensor
+  site: http://www.localsensor.com
+- name: Magine TV
+  site: https://magine.com
+- name: Medallia
+  site: http://www.medallia.com
+- name: MediaCrossing
+  site: http://www.mediacrossing.com
+- name: Medidata Solutions
+  site: http://www.mdsol.com
+- name: meemo
+  site: http://www.meemo.io
+- name: Mesosphere
+  site: http://www.mesosphere.io
+- name: Motus
+  site: http://www.motus.com
+- name: Netflix
+  site: http://www.netflix.com
+- name: Oakmore Labs
+  site: http://www.oakmorelabs.com
+- name: Orbitz Worldwide
+  site: http://www.orbitz.com/
+- name: OpenCredo
+  site: http://www.opencredo.com/
+- name: OpenTable
+  site: http://www.opentable.com
+- name: Oscar Insurance
+  site: https://www.hioscar.com/
+- name: OVH
+  site: https://www.ovh.com/
+- name: PayPal
+  site: https://www.paypal.com
+- name: Pinkbike
+  site: http://www.pinkbike.com
+- name: ProfitStars
+  site: http://www.profitstars.com
+- name: Qubit
+  site: http://www.qubitproducts.com
+- name: Qunar
+  site: http://www.qunar.com
+- name: RelateIQ
+  site: http://www.relateiq.com
+- name: Revisely
+  site: http://revise.ly
+- name: Sabre Labs
+  site: http://www.sabre.com
+- name: Sailthru
+  site: http://www.sailthru.com
+- name: Scrapinghub
+  site: http://www.scrapinghub.com
+- name: Sharethrough
+  site: http://www.sharethrough.com
+- name: Shopee
+  site: http://www.shopee.sg
+- name: Sigmoid Analytics
+  site: http://www.sigmoidanalytics.com/
+- name: SiQueries
+  site: https://siqueries.com
+- name: Sloppy.io
+  site: http://sloppy.io
+- name: SmartProcure
+  site: https://smartprocure.us
+- name: Squarespace
+  site: http://squarespace.com
+- name: TellApart
+  site: http://www.tellapart.com/
+- name: Teralytics
+  site: http://www.teralytics.net/
+- name: The Factory
+  site: http://www.thefactory.com
+- name: Time Warner Cable
+  site: http://www.timewarnercable.com
+- name: Twitter
+  site: http://www.twitter.com
+- name: Uber
+  site: http://www.uber.com
+- name: UCSF
+  site: http://www.ucsf.edu
+- name: UC Berkeley
+  site: http://www.berkeley.edu
+- name: Udacity
+  site: https://udacity.com
+- name: Uninett AS
+  site: http://www.uninett.no
+- name: URX
+  site: http://www.urx.com
+- name: Viadeo
+  site: http://www.viadeo.com
+- name: Virdata
+  site: http://www.virdata.com
+- name: Weibo
+  site: http://weibo.com/
+- name: Whisk
+  site: http://www.whisk.com
+- name: Wizcorp
+  site: http://www.wizcorp.jp
+- name: WooRank
+  site: http://www.woorank.com
+- name: Yelp
+  site: http://www.yelp.com
+- name: Yieldbot
+  site: http://www.yieldbot.com
+- name: Yodle
+  site: http://www.yodle.com
+- name: Xiaomi
+  site: http://www.xiaomi.com
+- name: Xogito
+  site: http://www.xogito.com)

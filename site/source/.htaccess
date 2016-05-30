@@ -1,1 +1,2 @@
 Redirect 301 /documentation/index.html http://mesos.apache.org/documentation/latest/index.html
+Redirect 301 /documentation/latest/powered-by-mesos/ /community/powered-by-mesos/

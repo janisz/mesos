@@ -1,0 +1,40 @@
+---
+title: Apache Mesos - Powered By Mesos
+---
+<div class="col-md-12">
+  <div class="row feature-list">
+  <div class="col-md-4 col-sm-4 feature-item">
+     <h4>New to Mesos</h4>
+     <p>See the <a href="/gettingstarted/">getting started</a> page for more
+        information about downloading, building, and deploying Mesos.</p>
+  </div>
+
+  <div class="col-md-4 col-sm-4 feature-item">
+     <h4>Want to get involved or looking for support</h4>
+     <p>See our <a href="/community/">community</a> page for more details.</p>
+  </div>
+
+  <div class="col-md-4 col-sm-4 feature-item">
+    <h4>Built on Mesos</h4>
+    <p>See the <a href="/documentation/latest/./frameworks/">
+      Mesos frameworks page</a> for a list of apps built on top of Mesos,
+      and instructions on how to use them.</p>
+  </div>
+</div>
+
+   <div class="row">
+     <div class="row header">
+       <h3>Powered By Mesos</h3>
+       <p class="lead">
+         Organizations using Mesos
+       </p>
+     </div>
+      <% data.adopters.adopters.each do |adopter| %>
+      <div class="col-xs-6 col-sm-3 col-md-2">
+        <a href="<%= adopter.site %>"><%= adopter.name %></a>
+      </div>
+      <% end %>
+   </div>
+   <p>If you’re using Mesos, please add yourself to the list above, or email
+      user@mesos.apache.org and we’ll add you!</p>
+</div>

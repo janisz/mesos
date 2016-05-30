@@ -6,7 +6,7 @@ layout: community_section
 
 <h1>About the Community</h1>
 
-<p>Apache Mesos is an open source community that's organized by its members, including you! Whether you're running or writing a framework, or hacking the core, there are opportunities for you to get in touch and ask questions, get involved locally, and contribute back. If you're interested in who is using Mesos, check out our growing <a href="/documentation/latest/powered-by-mesos/">Powered By Mesos</a> list.</p>
+<p>Apache Mesos is an open source community that's organized by its members, including you! Whether you're running or writing a framework, or hacking the core, there are opportunities for you to get in touch and ask questions, get involved locally, and contribute back. If you're interested in who is using Mesos, check out our growing <a href="/community/powered-by-mesos/">Powered By Mesos</a> list.</p>
 
 <div class="row-fluid">
   <div class="col-md-6">
