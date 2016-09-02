@@ -497,6 +497,24 @@
 
   mesosApp.controller('OffersCtrl', function() {});
 
+  mesosApp.controller('MaintenanceCtrl', [
+      '$scope', '$routeParams', '$http', '$q', '$timeout', 'top',
+      function($scope, $routeParams, $http, $q, $timeout, $top) {
+    var pollState = function() {
+      $http.jsonp('maintenance/schedule?jsonp=JSON_CALLBACK')
+        .success(function(response) {
+          $scope.maintenance = response;
+          console.log(response);
+        })
+        .error(function() {
+          if ($scope.isErrorModalOpen === false) {
+            popupErrorModal();
+          }
+        });
+    };
+    pollState();
+  }]);
+
   mesosApp.controller('FrameworkCtrl', function($scope, $routeParams) {
     var update = function() {
       if ($routeParams.id in $scope.completed_frameworks) {
