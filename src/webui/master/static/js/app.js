@@ -4,6 +4,8 @@
   angular.module('mesos', ['ngRoute', 'mesos.services', 'ui.bootstrap', 'ui.bootstrap.dialog']).
     config(['paginationConfig', '$routeProvider', function(paginationConfig, $routeProvider) {
       $routeProvider
+        .when('/maintenance',
+          {templateUrl: 'static/maintenance.html', controller: 'maintenanceCtrl'})
         .when('/',
           {templateUrl: 'static/home.html', controller: 'HomeCtrl'})
         .when('/frameworks',
