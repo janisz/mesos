@@ -49,6 +49,37 @@
         <span ng-show="moreInfo">
           <dt>Logging level:</dt>
           <dd>{{state.flags.logging_level}}</dd>
+          <dt><i class="devicons devicons-docker"></i> Registry:</dt>
+          <dd><a href="{{state.flags.docker_registry}}">{{state.flags.docker_registry}}</a></dd>
+          <dt><i class="devicons devicons-docker"></i> Kill orphans:</dt>
+          <dd>
+            <span ng-show="state.flags.docker_kill_orphans" class="glyphicon glyphicon-ok"></span>
+            <span ng-show="!state.flags.docker_kill_orphans" class="glyphicon glyphicon-remove"></spam>
+          </dd>
+          <dt><i class="devicons devicons-docker"></i> Remove delay:</dt>
+          <dd>{{state.flags.docker_remove_delay}}</dd>
+          <dt><i class="devicons devicons-docker"></i> Socket:</dt>
+          <dd>{{state.flags.docker_socket}}</dd>
+          <dt><i class="devicons devicons-docker"></i> Store directory:</dt>
+          <dd>{{state.flags.docker_store_dir}}</dd>
+          <dt><i class="devicons devicons-docker"></i> Volume checkpoint directory:</dt>
+          <dd>{{state.flags.docker_volume_checkpoint_dir}}</dd>
+          <dt>
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Policy:
+          </dt>
+          <dd>{{state.flags.recover}}</dd>
+          <dt>
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Timeout:
+          </dt>
+          <dd>{{state.flags.recovery_timeout}}</dd>
+          <dt>
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Cache directory:
+          </dt>
+          <dd>{{state.flags.fetcher_cache_dir}}</dd>
+          <dt>
+            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Cache size:
+          </dt>
+          <dd>{{state.flags.fetcher_cache_size}}</dd>
         </span>
       </dl>
       <p><a href="" ng-click="log($event)">LOG</a></p>
