@@ -220,6 +220,71 @@
     $scope.idle_disk = $scope.total_disk - ($scope.offered_disk + $scope.used_disk);
 
     $scope.time_since_update = 0;
+    console.log($scope.used_cpus);
+    var cpuchart = new CanvasJS.Chart("CpuChartContainer",
+        {
+          title:{
+            text: "CPU Usage",
+            fontFamily: "Impact",
+            fontWeight: "normal"
+          },
+
+          legend:{
+            verticalAlign: "bottom",
+            horizontalAlign: "center"
+          },
+          data: [
+            {
+              //startAngle: 45,
+              indexLabelFontSize: 20,
+              indexLabelFontFamily: "Garamond",
+              indexLabelFontColor: "darkgrey",
+              indexLabelLineColor: "darkgrey",
+              indexLabelPlacement: "outside",
+              type: "doughnut",
+              showInLegend: true,
+              dataPoints: [
+                {  y: $scope.used_cpus, legendText:"Used", indexLabel: "Used" },
+                {  y: $scope.offered_cpus, legendText:"Offered", indexLabel: "Offered" },
+                {  y: $scope.idle_cpus, legendText:"Idle", indexLabel: "Idle" }
+              ]
+            }
+          ]
+        });
+    cpuchart.render();
+
+    var memchart = new CanvasJS.Chart("memChartContainer",
+        {
+          title:{
+            text: "MEM Usage",
+            fontFamily: "Impact",
+            fontWeight: "normal"
+          },
+
+          legend:{
+            verticalAlign: "bottom",
+            horizontalAlign: "center"
+          },
+          data: [
+            {
+              //startAngle: 45,
+              indexLabelFontSize: 20,
+              indexLabelFontFamily: "Garamond",
+              indexLabelFontColor: "darkgrey",
+              indexLabelLineColor: "darkgrey",
+              indexLabelPlacement: "outside",
+              type: "doughnut",
+              showInLegend: true,
+              dataPoints: [
+                {  y: $scope.used_mem, legendText:"Used", indexLabel: "Used" },
+                {  y: $scope.offered_mem, legendText:"Offered", indexLabel: "Offered" },
+                {  y: $scope.idle_mem, legendText:"Idle", indexLabel: "Idle" }
+              ]
+            }
+          ]
+        });
+    memchart.render();
+
     $scope.$broadcast('state_updated');
 
     return true; // Continue polling.
@@ -581,7 +646,6 @@
         $('#alert').show();
         return;
       }
-
       var pid = $scope.agents[$routeParams.agent_id].pid;
       var hostname = $scope.agents[$routeParams.agent_id].hostname;
       var id = pid.substring(0, pid.indexOf('@'));
