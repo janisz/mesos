@@ -47,11 +47,26 @@
       <td>{{framework.role}}</td>
       <td>{{framework.principal}}</td>
       <td>{{framework.tasks.length}}</td>
-      <td>{{framework.used_resources.cpus | number}}</td>
-      <td>{{framework.used_resources.gpus | number}}</td>
-      <td>{{framework.used_resources.mem * (1024 * 1024) | dataSize}}</td>
-      <td>{{framework.used_resources.disk * (1024 * 1024) | dataSize}}</td>
-      <td>{{framework.max_share * 100 | number}}%</td>
+      <td>
+        {{framework.used_resources.cpus | number}}
+        <progressbar class="resource-progressbar" max=1 value=framework.cpus_share />
+      </td>
+      <td>
+        {{framework.used_resources.gpus | number}}
+        <progressbar class="resource-progressbar" max=1 value=framework.gpus_share />
+      </td>
+      <td>
+        {{framework.used_resources.mem * (1024 * 1024) | dataSize}}
+        <progressbar class="resource-progressbar" max=1 value=framework.mem_share />
+      </td>
+      <td>
+        {{framework.used_resources.disk * (1024 * 1024) | dataSize}}
+        <progressbar class="resource-progressbar" max=1 value=framework.disk_share />
+      </td>
+      <td>
+        {{framework.max_share * 100 | number}}%
+        <progressbar class="resource-progressbar" max=1 value=framework.max_share />
+      </td>
       <td>
         <m-timestamp value="{{framework.registered_time * 1000}}"></m-timestamp>
       </td>

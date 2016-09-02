@@ -36,15 +36,19 @@
     <td>{{agent.hostname}}</td>
     <td>
       {{agent.used_resources.cpus | number}} / {{agent.resources.cpus | number}}
+      <progressbar class="resource-progressbar" max=agent.resources.cpus value=agent.used_resources.cpus />
     </td>
     <td>
       {{agent.used_resources.gpus | number}} / {{agent.resources.gpus | number}}
+      <progressbar class="resource-progressbar" max=agent.resources.gpus value=agent.used_resources.gpus />
     </td>
     <td>
       {{agent.used_resources.mem * (1024 * 1024) | dataSize}} / {{agent.resources.mem * (1024 * 1024) | dataSize}}
+      <progressbar class="resource-progressbar" max=agent.resources.mem value=agent.used_resources.mem />
     </td>
     <td>
       {{agent.used_resources.disk * (1024 * 1024) | dataSize}} / {{agent.resources.disk * (1024 * 1024) | dataSize}}
+      <progressbar class="resource-progressbar" max=agent.resources.disk value=agent.used_resources.disk />
     </td>
     <td>
       <m-timestamp value="{{agent.registered_time * 1000}}"></m-timestamp>
