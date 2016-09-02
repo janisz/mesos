@@ -7,35 +7,29 @@
   </li>
 </ol>
 
-<table m-table table-content="offers" title="Outstanding Offers"
+<table m-table table-content="maintenance.windows" title="Outstanding Maintenance "
   class="table table-striped table-bordered table-condensed">
   <thead>
     <tr>
       <th data-key="id">Start</th>
-      <th data-key="framework_name">Duration</th>
-      <th data-key="hostname">Host Name</th>
-      <th data-key="resources.cpus">Machine ID's</th>
+      <th data-key="start">Duration</th>
+      <th data-key="hostname">HostName</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="offer in $data">
+    <tr ng-repeat="window in $data">
       <td>
-        <abbr title="{{offer.id}}">{{offer.id | truncateMesosID}}</abbr>
+          {{(window.unavailability.start.nanoseconds/1000000) | date:'yyyy-MM-dd HH:mm' }}
+
       </td>
       <td>
-        <a href="{{'#/frameworks/' + offer.framework_id}}">
-          {{offer.framework_name}}
-        </a>
+          {{(window.unavailability.duration.nanoseconds+ window.unavailability.start.nanoseconds)/1000000 | date:'yyyy-MM-dd HH:mm'}}
       </td>
       <td>
-        <a href="#/agents/{{agents[offer.slave_id].id}}">
-          {{offer.hostname}}
-        </a>
+          <div ng-repeat="machine_ids in window.machine_ids">
+          {{machine_ids.hostname}}
+          </div>
       </td>
-      <td>{{offer.resources.cpus | number}}</td>
-      <td>{{offer.resources.gpus | number}}</td>
-      <td>{{offer.resources.mem * (1024 * 1024) | dataSize}}</td>
-      <td>{{offer.resources.disk * (1024 * 1024) | dataSize}}</td>
     </tr>
   </tbody>
 </table>
