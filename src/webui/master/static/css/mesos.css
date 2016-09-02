@@ -163,3 +163,8 @@ a.badge-type:hover {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+.resource-progressbar {
+  height: 5px;
+  margin: 0 0 0 0;
+}
