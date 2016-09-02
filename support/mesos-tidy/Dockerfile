@@ -72,7 +72,7 @@ RUN apt-get install -qy \
   libsvn-dev \
   libtool \
   maven \
-  openjdk-7-jdk \
+  openjdk-8-jdk \
   zlib1g-dev && \
   apt-get clean
 

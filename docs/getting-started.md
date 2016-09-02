@@ -30,7 +30,7 @@ Mesos agent also run on Windows. To build Mesos agent from source, Visual Studio
 
 Make sure your hostname is resolvable via DNS or via `/etc/hosts` to allow full support of Docker's host-networking capabilities, needed for some of the Mesos tests. When in doubt, please validate that `/etc/hosts` contains your hostname.
 
-### Ubuntu 14.04
+### Ubuntu 16.04
 
 Following are the instructions for stock Ubuntu 14.04. If you are using a different OS, please install the packages accordingly.
 
@@ -41,7 +41,7 @@ Following are the instructions for stock Ubuntu 14.04. If you are using a differ
     $ sudo apt-get install -y tar wget git
 
     # Install the latest OpenJDK.
-    $ sudo apt-get install -y openjdk-7-jdk
+    $ sudo apt-get install -y openjdk-8-jdk
 
     # Install autotools (Only necessary if building from git repository).
     $ sudo apt-get install -y autoconf libtool
