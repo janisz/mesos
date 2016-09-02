@@ -41,6 +41,15 @@
         </dd>
         <dt>Master:</dt>
         <dd>{{state.master_hostname}}</dd>
+        <dt>More information:</dt>
+        <dd>
+          <button type="button" class="btn btn-default btn-xs" ng-show="!moreInfo" ng-hide="moreInfo" ng-click="moreInfo=!moreInfo" ng-init="moreInfo=false">Show</button>
+          <button type="button" class="btn btn-default btn-xs" ng-show="moreInfo" ng-hide="!moreInfo" ng-click="moreInfo=!moreInfo" ng-init="moreInfo=false">Hide</button>
+        </dd>
+        <span ng-show="moreInfo">
+          <dt>Logging level:</dt>
+          <dd>{{state.flags.logging_level}}</dd>
+        </span>
       </dl>
       <p><a href="" ng-click="log($event)">LOG</a></p>
 
