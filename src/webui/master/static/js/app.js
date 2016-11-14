@@ -20,6 +20,8 @@
           {templateUrl: 'static/agent_framework.html', controller: 'AgentFrameworkCtrl'})
         .when('/agents/:agent_id/frameworks/:framework_id/executors/:executor_id',
           {templateUrl: 'static/agent_executor.html', controller: 'AgentExecutorCtrl'})
+        .when('/maintenance',
+          {templateUrl: 'static/maintenance.html', controller: 'MaintenanceCtrl'})
 
         // TODO(tomxing): Remove the following '/slaves/*' paths once the
         // slave->agent rename is complete(MESOS-3779).
@@ -285,6 +287,11 @@
 
           var setSorting = function(el) {
             var key = el.attr('data-key');
+
+            // Prevent sorting when data-key is not defined
+            if (!key) {
+              return;
+            }
 
             if (scope.columnKey === key) {
               scope.sortOrder = !scope.sortOrder;
