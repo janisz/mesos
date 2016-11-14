@@ -2,8 +2,8 @@
  "windows" : [
    {
      "machine_ids" : [
-       { "hostname" : "machine1", "ip" : "10.0.0.1" },
-       { "hostname" : "machine2", "ip" : "10.0.0.2" }
+       { "hostname" : "machine1" },
+       { "ip" : "10.0.0.2" }
      ],
      "unavailability" : {
        "start" : { "nanoseconds" : 1443830400000000000 },
@@ -15,6 +15,24 @@
      ],
      "unavailability" : {
        "start" : { "nanoseconds" : 1443834000000000000 },
+       "duration" : { "nanoseconds" : 3600000000000 }
+     }
+   },
+   {
+     "machine_ids" : [
+       { "hostname" : "machine5", "ip" : "10.0.0.5" }
+     ],
+     "unavailability" : {
+       "start" : { "nanoseconds" : 144834000000000000 },
+       "duration" : { "nanoseconds" : 3600000000000 }
+     }
+   },
+   {
+     "machine_ids" : [
+       { "hostname" : "machine4", "ip" : "10.0.0.4" }
+     ],
+     "unavailability" : {
+       "start" : { "nanoseconds" : 144334000000000000 },
        "duration" : { "nanoseconds" : 3600000000000 }
      }
    }

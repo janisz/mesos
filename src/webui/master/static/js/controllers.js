@@ -451,7 +451,6 @@
       $http.jsonp('maintenance/schedule?jsonp=JSON_CALLBACK')
         .success(function(response) {
           $scope.maintenance = response;
-          console.log(response);
         })
         .error(function() {
           if ($scope.isErrorModalOpen === false) {

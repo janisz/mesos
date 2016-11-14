@@ -97,6 +97,13 @@
         return $filter('date')(i, 'yyyy-MM-ddTH:mm:ssZ');
       };
     })
+    .filter('duration', function($filter) {
+      return function(date) {
+        var i = parseInt(date, 10);
+        if (_.isNaN(i)) { return '' };
+        return duration(i);
+      };
+    })
     .filter('relativeDate', function() {
       return function(date, refDate) {
         var i = parseInt(date, 10);
@@ -287,6 +294,10 @@
 
           var setSorting = function(el) {
             var key = el.attr('data-key');
+
+            if (key == null) {
+              return;
+            }
 
             if (scope.columnKey === key) {
               scope.sortOrder = !scope.sortOrder;
