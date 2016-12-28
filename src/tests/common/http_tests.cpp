@@ -91,6 +91,7 @@ TEST(HTTPTest, ModelTask)
 
   Task task = createTask(taskInfo, state, frameworkId);
   task.add_statuses()->CopyFrom(statuses[0]);
+  task.set_start_time(1482932544);
 
   JSON::Value object = model(task);
 
@@ -140,7 +141,8 @@ TEST(HTTPTest, ModelTask)
       "   },"
       "   \"visibility\":\"CLUSTER\""
       " },"
-      " \"user\":\"user1\""
+      " \"user\":\"user1\","
+      " \"start_time\":1482932544"
       "}");
 
   ASSERT_SOME(expected);

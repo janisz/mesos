@@ -360,6 +360,10 @@ JSON::Object model(const Task& task)
     object.values["container"] = JSON::protobuf(task.container());
   }
 
+  if (task.has_start_time()) {
+    object.values["start_time"] = task.start_time();
+  }
+
   return object;
 }
 

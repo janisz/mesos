@@ -7822,6 +7822,12 @@ void Master::updateTask(Task* task, const StatusUpdate& update)
   // task transitioned to a new state.
   bool sendSubscribersUpdate = false;
 
+  // Set start_time
+  if (status.state() != TASK_STAGING &&
+          (!task->has_start_time() || status.timestamp() < task->start_time())) {
+    task->set_start_time(status.timestamp());
+  }
+
   // Set 'terminated' to true if this is the first time the task
   // transitioned to terminal state. Also set the latest state.
   bool terminated;

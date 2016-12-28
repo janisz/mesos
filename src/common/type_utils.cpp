@@ -392,7 +392,8 @@ bool operator==(const Task& left, const Task& right)
     left.status_update_uuid() == right.status_update_uuid() &&
     left.labels() == right.labels() &&
     left.discovery() == right.discovery() &&
-    left.user() == right.user();
+    left.user() == right.user() &&
+    left.start_time() == right.start_time();
 }
 
 
