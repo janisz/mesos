@@ -588,7 +588,7 @@ private:
       cout << "Sending SIGTERM to process tree at pid " << pid << endl;
 
       Try<std::list<os::ProcessTree>> trees =
-        os::killtree(pid, SIGTERM, true, true);
+        os::killChildrenTree(pid, SIGTERM, true, true);
 
       if (trees.isError()) {
         cerr << "Failed to kill the process tree rooted at pid " << pid

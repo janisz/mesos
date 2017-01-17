@@ -336,6 +336,108 @@ TEST_P(CommandExecutorTest, NoTransitionFromKillingToRunning)
 #endif // __WINDOWS__
 
 
+// TODO(hausdorff): Kill policy helpers are not yet enabled on Windows. See
+// MESOS-6698.
+#ifndef __WINDOWS__
+// This test ensures that a wrapping sh -c for a command won't get SIGTERM.
+TEST_P(CommandExecutorTest, DoNotKillWrapperShell )
+{
+  Try<Owned<cluster::Master>> master = StartMaster();
+  ASSERT_SOME(master);
+
+  Owned<MasterDetector> detector = master.get()->createDetector();
+
+  slave::Flags flags = CreateSlaveFlags();
+  flags.http_command_executor = GetParam();
+
+  Try<Owned<cluster::Slave>> slave = StartSlave(detector.get(), flags);
+  ASSERT_SOME(slave);
+
+  // Start the framework with the task killing capability.
+  FrameworkInfo::Capability capability;
+  capability.set_type(FrameworkInfo::Capability::TASK_KILLING_STATE);
+
+  FrameworkInfo frameworkInfo = DEFAULT_FRAMEWORK_INFO;
+  frameworkInfo.add_capabilities()->CopyFrom(capability);
+
+  MockScheduler sched;
+  MesosSchedulerDriver driver(
+      &sched, frameworkInfo, master.get()->pid, DEFAULT_CREDENTIAL);
+
+  EXPECT_CALL(sched, registered(&driver, _, _));
+
+  Future<vector<Offer>> offers;
+  EXPECT_CALL(sched, resourceOffers(&driver, _))
+    .WillOnce(FutureArg<1>(&offers))
+    .WillRepeatedly(Return()); // Ignore subsequent offers.
+
+  driver.start();
+
+  AWAIT_READY(offers);
+  EXPECT_EQ(1u, offers->size());
+
+  // Script that will sleep in a loop and catch and ignore SIGTERM
+  string script = "#!/bin/bash \n"
+  "function catch {            \n"
+  " echo \"SIGTERM\"           \n"
+  "}                           \n"
+  "trap catch SIGTERM          \n"
+  "while true; do              \n"
+  " sleep 1                    \n"
+  "done                        \n";
+
+  Try<string> tempScript = os::mktemp(path::join(os::getcwd(), "XXXXXX"));
+  ASSERT_SOME(tempScript);
+  const string scriptPath = tempScript.get();
+
+  ASSERT_SOME(os::write(scriptPath, script));
+
+  const string command = "bash " + scriptPath;
+
+  TaskInfo task = createTask(offers->front(), command);
+
+  // Set the kill policy grace period.
+  KillPolicy killPolicy;
+  killPolicy.mutable_grace_period()->set_nanoseconds(Seconds(5).ns());
+
+  task.mutable_kill_policy()->CopyFrom(killPolicy);
+
+  vector<TaskInfo> tasks;
+  tasks.push_back(task);
+
+  Future<TaskStatus> statusRunning;
+  Future<TaskStatus> statusHealthy;
+  Future<TaskStatus> statusKilling;
+  Future<TaskStatus> statusKilled;
+
+  EXPECT_CALL(sched, statusUpdate(&driver, _))
+    .WillOnce(FutureArg<1>(&statusRunning))
+    .WillOnce(FutureArg<1>(&statusKilling))
+    .WillOnce(FutureArg<1>(&statusKilled));
+
+  driver.launchTasks(offers->front().id(), tasks);
+
+  AWAIT_READY(statusRunning);
+  EXPECT_EQ(TASK_RUNNING, statusRunning.get().state());
+
+  driver.killTask(task.task_id());
+
+  AWAIT_READY(statusKilling);
+  EXPECT_EQ(TASK_KILLING, statusKilling->state());
+  EXPECT_FALSE(statusKilling.get().has_healthy());
+
+  AWAIT_READY(statusKilled);
+  EXPECT_EQ(TASK_KILLED, statusKilled->state());
+  EXPECT_FALSE(statusKilled.get().has_healthy());
+
+  EXPECT_LE(statusKilling.get().timestamp()+5, statusKilled.get().timestamp());
+
+  os::rm(scriptPath);
+  driver.stop();
+  driver.join();
+}
+#endif // __WINDOWS__
+
 class HTTPCommandExecutorTest
   : public MesosTest {};
 
