@@ -300,7 +300,12 @@
           });
 
           var setTableData = function() {
-            scope.filteredData = $filter('filter')(scope.originalData, scope.filterTerm)
+            scope.filteredData = scope.originalData.filter(function(data) {
+              console.log(data);
+              var reexp = new RegExp(scope.filterTerm);
+
+              return reexp.test(JSON.stringify(data));
+            });
             scope.$data = $filter('orderBy')(
               scope.filteredData,
               scope.columnKey,
