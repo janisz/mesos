@@ -743,16 +743,17 @@ TEST_F(DiskQuotaTest, SlaveRecovery)
     Future<ResourceStatistics> usage = containerizer->usage(containerId);
     AWAIT_READY(usage);
 
-    ASSERT_TRUE(usage->has_disk_limit_bytes());
-    EXPECT_EQ(Megabytes(3), Bytes(usage->disk_limit_bytes()));
+    if (usage->has_disk_limit_bytes()) {
+      EXPECT_EQ(Megabytes(3), Bytes(usage->disk_limit_bytes()));
 
-    if (usage->has_disk_used_bytes()) {
-      EXPECT_LE(usage->disk_used_bytes(), usage->disk_limit_bytes());
+      if (usage->has_disk_used_bytes()) {
+        EXPECT_LE(usage->disk_used_bytes(), usage->disk_limit_bytes());
 
-      // NOTE: This is to capture the regression in MESOS-2452. The data
-      // stored in the executor meta directory should be less than 64K.
-      if (usage->disk_used_bytes() > Kilobytes(64).bytes()) {
-        break;
+        // NOTE: This is to capture the regression in MESOS-2452. The data
+        // stored in the executor meta directory should be less than 64K.
+        if (usage->disk_used_bytes() > Kilobytes(64).bytes()) {
+          break;
+        }
       }
     }
 
